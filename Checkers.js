@@ -58,16 +58,34 @@ function White_Turn(){
 	console.table(the_Board);
 
 	// AI selects token
-	var input_start_X = 0;
-	var input_start_Y = 0;
-	if (the_Board[input_start_X][input_start_Y] === 1){ // only if you enter your token coordinates you move
-		//AI selects where to go
-		//AI uses Move_This_To_That
-		 
+	var input_end_X = 0;
+	var input_end_Y = 0;
+	for(int i =7; i>=0;i--){ //we are starting from the enemy side to make AI more "aggressive"
+		for(int j =7; j>=0;j--){
+			if (the_Board[i][j]===2 || the_Board[i][j]===4){
+				var input_start_X = i;
+				var input_start_Y = j; //give it some randomness
+			} 
+		}		
 	}
+	//AI selects where to go
+	if(the_Board[input_start_X][input_start_Y]==2){ // normals, not kings
+		if(the_Board[input_start_X+1][input_start_Y+1]===0||the_Board[input_start_X+1][input_start_Y -1]===0){
+			var to_go = Math.random();
+			var input_end_X = input_start_X+1
+			if(to_go ===1) var input_end_Y = input_start_Y+1;
+			else var input_end_Y = input_start_Y+1;
+		}
+	}
+	//AI uses Move_This_To_That
+	if(the_Board[input_end_X][input_end_Y] === 0) Move_Peacefully(input_start_X, input_start_Y, input_end_X, input_end_Y);
+	else if(the_Board[input_end_X][input_end_Y] === 2 ||the_Board[input_end_X][input_end_Y] === 4){
+		Move_to_Kill();
+	}
+	
+
 	//temporary because no AI
 	turn = 0;
-
 }
 
 //functiom moves piece
@@ -89,8 +107,11 @@ function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 
 		turn = 0;
 	}
 }
-
-//function that checks if you can move there
-function Where_Can_I_Move(start_X, start_Y){
-	if
+function Move_Peacefully(start_X, start_Y, end_X, end_Y){
+	the_Board[end_X][end_Y] = the_Board[start_X][start_Y];
+	the_Board[start_X][start_Y] = 0;
+	if (turn === 0)turn = 1
+	else turn = 0;
+}
+function Move_to_Kill(start_X, start_Y, end_X, end_Y){
 }
