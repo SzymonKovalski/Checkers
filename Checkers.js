@@ -10,7 +10,7 @@ var the_Board = [
   [2,0,2,0,2,0,2,0],
   [0,2,0,2,0,2,0,2],
   [0,0,0,0,0,0,0,0],
-  [0,2,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
   [1,0,1,0,1,0,1,0],
   [0,1,0,1,0,1,0,1],
   [1,0,1,0,1,0,1,0]
@@ -114,4 +114,5 @@ function Move_Peacefully(start_X, start_Y, end_X, end_Y){
 	else turn = 0;
 }
 function Move_to_Kill(start_X, start_Y, end_X, end_Y){
+
 }
