@@ -59,33 +59,45 @@ function White_Turn(){
 
 	// AI selects token
 	var input_end_X = 0;
-	var input_end_Y = 0;
-	for(int i =7; i>=0;i--){ //we are starting from the enemy side to make AI more "aggressive"
-		for(int j =7; j>=0;j--){
-			if (the_Board[i][j]===2 || the_Board[i][j]===4){
-				var input_start_X = i;
-				var input_start_Y = j; //give it some randomness
-			} 
-		}		
-	}
-	//AI selects where to go
-	if(the_Board[input_start_X][input_start_Y]==2){ // normals, not kings
-		if(the_Board[input_start_X+1][input_start_Y+1]===0||the_Board[input_start_X+1][input_start_Y -1]===0){
-			var to_go = Math.random();
-			var input_end_X = input_start_X+1
-			if(to_go ===1) var input_end_Y = input_start_Y+1;
-			else var input_end_Y = input_start_Y+1;
-		}
-	}
-	//AI uses Move_This_To_That
-	if(the_Board[input_end_X][input_end_Y] === 0) Move_Peacefully(input_start_X, input_start_Y, input_end_X, input_end_Y);
-	else if(the_Board[input_end_X][input_end_Y] === 2 ||the_Board[input_end_X][input_end_Y] === 4){
-		Move_to_Kill();
-	}
-	
+	var input_end_Y = 0; 
+	for(var i=0; i<8; i++){ //picks the closest to enemy side, most to the right
+		
+			for(var j = 0; j < 8; j++){
+				if (the_Board[i][j]===2 || the_Board[i][j]===4){
+					var input_start_X = i;
+					var input_start_Y = j; // to do: give it some randomness
 
-	//temporary because no AI
-	turn = 0;
+
+					if(the_Board[input_start_X][input_start_Y]===2){//normies
+						var aggressive =0;
+						if(the_Board[input_start_Y+1][input_start_X+1] === 0){ //exception.
+							var input_end_Y =input_start_Y+1;
+							var input_end_X = input_start_X+1;
+							Move_Peacefully(input_start_X,input_start_Y,input_end_X,input_end_Y);
+							turn = 0;
+						}
+						else if(the_Board[input_start_Y-1][input_start_X+1] === 0){
+							var input_end_Y =input_start_Y-1;
+							var input_end_X = input_start_X+1;
+							Move_Peacefully(input_start_X,input_start_Y,input_end_X,input_end_Y);
+							turn = 0;
+						} 
+						else if((the_Board[input_start_Y+1][input_start_X+1] === 1||the_Board[input_start_Y+1][input_start_X+1] === 3)&&(the_Board[input_start_Y+2][input_start_X+2] === 0)){
+							var input_end_Y = input_start_Y+2;
+							var input_end_X = input_start_X+2;
+							var aggressive = 1;
+						}
+						else if((the_Board[input_start_Y+1][input_start_X+1] === 1||the_Board[input_start_Y+1][input_start_X+1] === 3)&&(the_Board[input_start_Y-2][input_start_X+2] === 0)){
+							var input_end_Y = input_start_Y-2;
+							var input_end_X = input_start_X+2;
+							var aggressive = 1;
+						}
+					}
+					//kings
+				} 
+			}
+		
+	}
 }
 
 //functiom moves piece
@@ -107,6 +119,7 @@ function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 
 		turn = 0;
 	}
 }
+
 function Move_Peacefully(start_X, start_Y, end_X, end_Y){
 	the_Board[end_X][end_Y] = the_Board[start_X][start_Y];
 	the_Board[start_X][start_Y] = 0;
