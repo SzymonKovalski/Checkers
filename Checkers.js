@@ -15,7 +15,7 @@ var the_Board = [
   [0,1,0,1,0,1,0,1],
   [1,0,1,0,1,0,1,0]
 ];
-
+var living[2] ={}//0
 
 //console.log(the_Board[7][0]); // = 1
 
@@ -57,49 +57,79 @@ function White_Turn(){
 	console.log("enemy turn");
 	console.table(the_Board);
 
-	// AI selects token
-	var input_end_X = 0;
-	var input_end_Y = 0; 
-	for(var i=0; i<8; i++){ //picks the closest to enemy side, most to the right
-		
-			for(var j = 0; j < 8; j++){
-				if (the_Board[i][j]===2 || the_Board[i][j]===4){
-					var input_start_X = i;
-					var input_start_Y = j; // to do: give it some randomness
-
-
-					if(the_Board[input_start_X][input_start_Y]===2){//normies
-						var aggressive =0;
-						if(the_Board[input_start_Y+1][input_start_X+1] === 0){ //exception.
-							var input_end_Y =input_start_Y+1;
-							var input_end_X = input_start_X+1;
-							Move_Peacefully(input_start_X,input_start_Y,input_end_X,input_end_Y);
-							turn = 0;
-						}
-						else if(the_Board[input_start_Y-1][input_start_X+1] === 0){
-							var input_end_Y =input_start_Y-1;
-							var input_end_X = input_start_X+1;
-							Move_Peacefully(input_start_X,input_start_Y,input_end_X,input_end_Y);
-							turn = 0;
-						} 
-						else if((the_Board[input_start_Y+1][input_start_X+1] === 1||the_Board[input_start_Y+1][input_start_X+1] === 3)&&(the_Board[input_start_Y+2][input_start_X+2] === 0)){
-							var input_end_Y = input_start_Y+2;
-							var input_end_X = input_start_X+2;
-							var aggressive = 1;
-						}
-						else if((the_Board[input_start_Y+1][input_start_X+1] === 1||the_Board[input_start_Y+1][input_start_X+1] === 3)&&(the_Board[input_start_Y-2][input_start_X+2] === 0)){
-							var input_end_Y = input_start_Y-2;
-							var input_end_X = input_start_X+2;
-							var aggressive = 1;
-						}
-					}
-					//kings
-				} 
+	Catalogue_all_moves(turn);//either 0 for player or 1 for enemies
+	turn = 0;
+}
+var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is list of moves
+//8 move variations. if any slot != 0 can move
+/*
+5       6
+  1   2
+    0
+  3   4
+7       8
+*/
+function Catalogue_all_moves(faction){ // check if there is an exception
+	var possible_enemy_moves[N][N][4] = {0}
+	for(var i=0; i<N;i++){
+		for(var j=0; j<N;j++){
+			if(the_Board[i][j]===faction+1){//peasants
+				var k = 0;
+				if(the_Board[i+1][j-1]===0){
+					possible_enemy_moves[i][j][k] = 3;
+					k++
+				}
+				if(the_Board[i+1][j+1]===0){
+					possible_enemy_moves[i][j][k] = 4;
+					k++
+				}
+				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+					possible_enemy_moves[i][j][k] = 7;
+					k++
+				}
+				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+					possible_enemy_moves[i][j][k] = 8;
+					k++
+				}
 			}
-		
+			if(the_Board[i][j]===faction+2){//kings
+				var k = 0;
+				if(the_Board[i-1][j-1]===0){
+					possible_enemy_moves[i][j][k] = 1;
+					k++
+				}
+				if(the_Board[i-1][j+1]===0){
+					possible_enemy_moves[i][j][k] = 2;
+					k++
+				}
+				if(the_Board[i+1][j-1]===0){
+					possible_enemy_moves[i][j][k] = 3;
+					k++
+				}
+				if(the_Board[i+1][j+1]===0){
+					possible_enemy_moves[i][j][k] = 4;
+					k++
+				}
+				if((the_Board[i-1][j-1]===faction||faction+2)&&(the_Board[i-2][j-2]===0)){
+					possible_enemy_moves[i][j][k] = 5;
+					k++
+				}
+				if((the_Board[i-1][j+1]===faction||faction+2)&&(the_Board[i-2][j+2]===0)){
+					possible_enemy_moves[i][j][k] = 6;
+					k++
+				}
+				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+					possible_enemy_moves[i][j][k] = 7;
+					k++
+				}
+				if((the_Board[i+1][j+1]===faction||faction+2)&&(the_Board[i+2][j+2]===0)){
+					possible_enemy_moves[i][j][k] = 8;
+					k++
+				}
+			}
+		}
 	}
 }
-
 //functiom moves piece
 function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 2 tokens
 	//base movement only if not killing
