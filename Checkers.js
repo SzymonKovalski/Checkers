@@ -72,12 +72,12 @@ var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is 
 */
 function Catalogue_all_moves(faction){ // check if there is an exception
 	possible_enemy_moves[N][N][4] = {0};
-	let counter =0;
+	living[faction] = {0};
 	for(let i=0; i<N;i++){
 		for(let j=0; j<N;j++){
-			let counter++
 			if(the_Board[i][j]===faction+1){//peasants
 				let k = 0;
+				living[faction]++;
 				if(the_Board[i+1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 3;
 					k++
@@ -97,6 +97,7 @@ function Catalogue_all_moves(faction){ // check if there is an exception
 			}
 			if(the_Board[i][j]===faction+2){//kings
 				let k = 0;
+				living[faction]++;
 				if(the_Board[i-1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 1;
 					k++;
