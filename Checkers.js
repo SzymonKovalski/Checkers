@@ -15,9 +15,7 @@ var the_Board = [
   [0,1,0,1,0,1,0,1],
   [1,0,1,0,1,0,1,0]
 ];
-var living[2] ={}//0
-
-//console.log(the_Board[7][0]); // = 1
+var living[2] ={12}//0 for you 1 for enemy
 
 //black go first
 var turn = 0;
@@ -41,12 +39,12 @@ function Black_Turn(){
 	console.log("your turn");
 	console.table(the_Board);
 
-	var input_start_X = prompt("Enter X pos of your token",[0]); // this can be done better
-	var input_start_Y = prompt("Enter Y pos of your token",[0]);
+	let input_start_X = prompt("Enter X pos of your token",[0]); // this can be done better
+	let input_start_Y = prompt("Enter Y pos of your token",[0]);
 	if (the_Board[input_start_X][input_start_Y] === 1){ // only if you enter your token coordinates you move
 		//put where you can move to here
-		var input_end_X = prompt("Enter X pos of where to move");
-		var input_end_Y = prompt("Enter Y pos of where to move");
+		let input_end_X = prompt("Enter X pos of where to move");
+		let input_end_Y = prompt("Enter Y pos of where to move");
 		//check if you can move there by the rules	
 			Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 	}
@@ -58,6 +56,9 @@ function White_Turn(){
 	console.table(the_Board);
 
 	Catalogue_all_moves(turn);//either 0 for player or 1 for enemies
+
+
+
 	turn = 0;
 }
 var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is list of moves
@@ -70,11 +71,13 @@ var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is 
 7       8
 */
 function Catalogue_all_moves(faction){ // check if there is an exception
-	var possible_enemy_moves[N][N][4] = {0}
-	for(var i=0; i<N;i++){
-		for(var j=0; j<N;j++){
+	possible_enemy_moves[N][N][4] = {0};
+	let counter =0;
+	for(let i=0; i<N;i++){
+		for(let j=0; j<N;j++){
+			let counter++
 			if(the_Board[i][j]===faction+1){//peasants
-				var k = 0;
+				let k = 0;
 				if(the_Board[i+1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 3;
 					k++
@@ -83,7 +86,7 @@ function Catalogue_all_moves(faction){ // check if there is an exception
 					possible_enemy_moves[i][j][k] = 4;
 					k++
 				}
-				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){  //peasant code is only working for white. change numbers for black
 					possible_enemy_moves[i][j][k] = 7;
 					k++
 				}
@@ -93,47 +96,49 @@ function Catalogue_all_moves(faction){ // check if there is an exception
 				}
 			}
 			if(the_Board[i][j]===faction+2){//kings
-				var k = 0;
+				let k = 0;
 				if(the_Board[i-1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 1;
-					k++
+					k++;
 				}
 				if(the_Board[i-1][j+1]===0){
 					possible_enemy_moves[i][j][k] = 2;
-					k++
+					k++;
 				}
 				if(the_Board[i+1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 3;
-					k++
+					k++;
 				}
 				if(the_Board[i+1][j+1]===0){
 					possible_enemy_moves[i][j][k] = 4;
-					k++
+					k++;
 				}
 				if((the_Board[i-1][j-1]===faction||faction+2)&&(the_Board[i-2][j-2]===0)){
 					possible_enemy_moves[i][j][k] = 5;
-					k++
+					k++;
 				}
 				if((the_Board[i-1][j+1]===faction||faction+2)&&(the_Board[i-2][j+2]===0)){
 					possible_enemy_moves[i][j][k] = 6;
-					k++
+					k++;
 				}
 				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
 					possible_enemy_moves[i][j][k] = 7;
-					k++
+					k++;
 				}
 				if((the_Board[i+1][j+1]===faction||faction+2)&&(the_Board[i+2][j+2]===0)){
 					possible_enemy_moves[i][j][k] = 8;
-					k++
+					k++;
 				}
 			}
 		}
 	}
+	living[faction]=counter;
+	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
 function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 2 tokens
 	//base movement only if not killing
-	var temp = the_Board[start_X][start_Y];
+	let temp = the_Board[start_X][start_Y];
 	
 	if(the_Board[end_X][end_Y] === 0){
 		the_Board[start_X][start_Y] = the_Board[end_X][end_Y];
