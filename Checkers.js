@@ -15,7 +15,7 @@ var the_Board = [
   [0,1,0,1,0,1,0,1],
   [1,0,1,0,1,0,1,0]
 ];
-var living[2] ={12}//0 for you 1 for enemy
+
 
 //black go first
 var turn = 0;
@@ -52,16 +52,40 @@ function Black_Turn(){
 //white turn version. do AI with this one
 function White_Turn(){
 
+	let input_start_X =0;
+	let input_start_Y =0;
+
 	console.log("enemy turn");
 	console.table(the_Board);
 
 	Catalogue_all_moves(turn);//either 0 for player or 1 for enemies
 
+	//randomise 0 to number_possibilities
+	let random_number = Math.floor((Math.random()*number_possibilities));
 
+	let counter =0;
+	let chosen_move =0;
+	for(let i=0; i<8;i++){
+		for(let j=0; j<8;j++){
+			if(the_Board[i][j]===2||4){
+				for(let k=0; k<4;k++)
+				{
+					if(possible_enemy_moves[i][j][k] != 0){
+						if(counter < random_number){
+							counter++;
+						}
+						input_start_X = i;
+						input_start_Y = j;
+						chosen_move = possible_enemy_moves[i][j][k];
+					}
+				}
+			}
+		}
+	}
 
 	turn = 0;
 }
-var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is list of moves
+var possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, third is list of moves
 //8 move variations. if any slot != 0 can move
 /*
 5       6
@@ -70,70 +94,84 @@ var possible_enemy_moves[N][N][4] = {0};//first 2 var are coordinates, third is 
   3   4
 7       8
 */
+var number_possibilities = 0;
 function Catalogue_all_moves(faction){ // check if there is an exception
-	possible_enemy_moves[N][N][4] = {0};
-	living[faction] = {0};
-	for(let i=0; i<N;i++){
-		for(let j=0; j<N;j++){
+	possible_enemy_moves = makeArray(8, 8, 4, 0);
+	
+	number_possibilities = 0;
+	for(let i=0; i<8;i++){
+		for(let j=0; j<8;j++){
 			if(the_Board[i][j]===faction+1){//peasants
 				let k = 0;
-				living[faction]++;
+				
 				if(the_Board[i+1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 3;
-					k++
+					k++;
+					number_possibilities++;
 				}
 				if(the_Board[i+1][j+1]===0){
 					possible_enemy_moves[i][j][k] = 4;
-					k++
+					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){  //peasant code is only working for white. change numbers for black
 					possible_enemy_moves[i][j][k] = 7;
-					k++
+					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
 					possible_enemy_moves[i][j][k] = 8;
-					k++
+					k++;
+					number_possibilities++;
 				}
 			}
 			if(the_Board[i][j]===faction+2){//kings
 				let k = 0;
-				living[faction]++;
+				
 				if(the_Board[i-1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 1;
 					k++;
+					number_possibilities++;
 				}
 				if(the_Board[i-1][j+1]===0){
 					possible_enemy_moves[i][j][k] = 2;
 					k++;
+					number_possibilities++;
 				}
 				if(the_Board[i+1][j-1]===0){
 					possible_enemy_moves[i][j][k] = 3;
 					k++;
+					number_possibilities++;
 				}
 				if(the_Board[i+1][j+1]===0){
 					possible_enemy_moves[i][j][k] = 4;
 					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i-1][j-1]===faction||faction+2)&&(the_Board[i-2][j-2]===0)){
 					possible_enemy_moves[i][j][k] = 5;
 					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i-1][j+1]===faction||faction+2)&&(the_Board[i-2][j+2]===0)){
 					possible_enemy_moves[i][j][k] = 6;
 					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
 					possible_enemy_moves[i][j][k] = 7;
 					k++;
+					number_possibilities++;
 				}
 				if((the_Board[i+1][j+1]===faction||faction+2)&&(the_Board[i+2][j+2]===0)){
 					possible_enemy_moves[i][j][k] = 8;
 					k++;
+					number_possibilities++;
 				}
 			}
 		}
 	}
-	living[faction]=counter;
+	
 	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
@@ -156,12 +194,16 @@ function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 
 	}
 }
 
-function Move_Peacefully(start_X, start_Y, end_X, end_Y){
-	the_Board[end_X][end_Y] = the_Board[start_X][start_Y];
-	the_Board[start_X][start_Y] = 0;
-	if (turn === 0)turn = 1
-	else turn = 0;
-}
-function Move_to_Kill(start_X, start_Y, end_X, end_Y){
-
+function makeArray(w, h, d, val) {
+    var arr = [];
+    for(let i = 0; i < h; i++) {
+        arr[i] = [];
+        for(let j = 0; j < w; j++) {
+        	arr[i][j] = [];
+        	for(let k = 0; k < d; k++) {
+            	arr[i][j][k] = val;
+            }
+        }
+    }
+    return arr;
 }
