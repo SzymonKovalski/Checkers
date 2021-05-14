@@ -55,6 +55,9 @@ function White_Turn(){
 	let input_start_X =0;
 	let input_start_Y =0;
 
+	let input_end_X =0; //can technically be removed, is here for ease of coding. FIX LATER
+	let input_end_Y =0;
+
 	console.log("enemy turn");
 	console.table(the_Board);
 
@@ -82,6 +85,45 @@ function White_Turn(){
 			}
 		}
 	}
+	//now we have coords and move
+	let is_the_AI_retarded = true; //is ai trying to move to non existing places. delete all mention of after debugging. FIX LATER
+	switch(chosen_move){
+		case 1:
+			if(the_board[input_start_X-1][input_start_Y-1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 2:
+			if(the_board[input_start_X-1][input_start_Y+1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 3:
+			if(the_board[input_start_X+1][input_start_Y-1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 4:
+			if(the_board[input_start_X+1][input_start_Y+1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+	}
+
+	console.log("is_the_AI_retarded");
+	console.log(is_the_AI_retarded);
 
 	turn = 0;
 }
