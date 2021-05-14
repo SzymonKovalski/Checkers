@@ -120,6 +120,39 @@ function White_Turn(){
 				is_the_AI_retarded = false;
 			}
 		break;
+
+		case 5:
+			if(the_board[input_start_X-1][input_start_Y-1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 6:
+			if(the_board[input_start_X-1][input_start_Y+1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 7:
+			if(the_board[input_start_X+1][input_start_Y-1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
+		case 8:
+			if(the_board[input_start_X+1][input_start_Y+1]===0){
+				let input_end_X =0;
+				let input_end_Y =0;
+
+				is_the_AI_retarded = false;
+			}
+		break;
 	}
 
 	console.log("is_the_AI_retarded");
