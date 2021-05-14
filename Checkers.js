@@ -76,87 +76,88 @@ function White_Turn(){
 					if(possible_enemy_moves[i][j][k] != 0){
 						if(counter < random_number){
 							counter++;
+							input_start_X = i;
+							input_start_Y = j;
+							chosen_move = possible_enemy_moves[i][j][k];
 						}
-						input_start_X = i;
-						input_start_Y = j;
-						chosen_move = possible_enemy_moves[i][j][k];
+						
 					}
 				}
 			}
 		}
 	}
+
 	//now we have coords and move
-	let is_the_AI_retarded = true; //is ai trying to move to non existing places. delete all mention of after debugging. FIX LATER
+	console.log(chosen_move);
 	switch(chosen_move){
 		case 1:
-			if(the_board[input_start_X-1][input_start_Y-1]===0){
+			if(the_Board[input_start_X-1][input_start_Y-1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (1)");
 			}
 		break;
 		case 2:
-			if(the_board[input_start_X-1][input_start_Y+1]===0){
+			if(the_Board[input_start_X-1][input_start_Y+1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (2)");
 			}
 		break;
 		case 3:
-			if(the_board[input_start_X+1][input_start_Y-1]===0){
+			if(the_Board[input_start_X+1][input_start_Y-1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (3)");
 			}
 		break;
 		case 4:
-			if(the_board[input_start_X+1][input_start_Y+1]===0){
+			if(the_Board[input_start_X+1][input_start_Y+1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (4)");
 			}
 		break;
 
 		case 5:
-			if(the_board[input_start_X-1][input_start_Y-1]===0){
+			if(the_Board[input_start_X-1][input_start_Y-1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (5)");
 			}
 		break;
 		case 6:
-			if(the_board[input_start_X-1][input_start_Y+1]===0){
+			if(the_Board[input_start_X-1][input_start_Y+1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (6)");
 			}
 		break;
 		case 7:
-			if(the_board[input_start_X+1][input_start_Y-1]===0){
+			if(the_Board[input_start_X+1][input_start_Y-1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (7)");
 			}
 		break;
 		case 8:
-			if(the_board[input_start_X+1][input_start_Y+1]===0){
+			if(the_Board[input_start_X+1][input_start_Y+1]===0){
 				let input_end_X =0;
 				let input_end_Y =0;
 
-				is_the_AI_retarded = false;
+				console.log("AI is not retarded (8)");
 			}
 		break;
 	}
 
-	console.log("is_the_AI_retarded");
-	console.log(is_the_AI_retarded);
+	
 
 	turn = 0;
 }
@@ -170,7 +171,7 @@ var possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, 
 7       8
 */
 var number_possibilities = 0;
-function Catalogue_all_moves(faction){ // check if there is an exception
+function Catalogue_all_moves(faction){
 	possible_enemy_moves = makeArray(8, 8, 4, 0);
 	
 	number_possibilities = 0;
@@ -179,66 +180,66 @@ function Catalogue_all_moves(faction){ // check if there is an exception
 			if(the_Board[i][j]===faction+1){//peasants
 				let k = 0;
 				
-				if(the_Board[i+1][j-1]===0){
+				if(the_Board[i+1][j-1]===0 && i<7 && j>0){
 					possible_enemy_moves[i][j][k] = 3;
 					k++;
 					number_possibilities++;
 				}
-				if(the_Board[i+1][j+1]===0){
+				if(the_Board[i+1][j+1]===0 && i<7 && j<7){
 					possible_enemy_moves[i][j][k] = 4;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){  //peasant code is only working for white. change numbers for black
+				if((the_Board[i+1][j-1]===(faction||faction+2))&&(the_Board[i+2][j-2]===0) && i<6 && j>1){  //peasant code is only working for white. change numbers for black
 					possible_enemy_moves[i][j][k] = 7;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+				if((the_Board[i+1][j-1]===(faction||faction+2))&&(the_Board[i+2][j-2]===0) && i<6 && j<6){
 					possible_enemy_moves[i][j][k] = 8;
 					k++;
 					number_possibilities++;
 				}
 			}
-			if(the_Board[i][j]===faction+2){//kings
+			if(the_Board[i][j]===faction+3){//kings
 				let k = 0;
 				
-				if(the_Board[i-1][j-1]===0){
+				if(the_Board[i-1][j-1]===0 && i>0 && j>0){
 					possible_enemy_moves[i][j][k] = 1;
 					k++;
 					number_possibilities++;
 				}
-				if(the_Board[i-1][j+1]===0){
+				if(the_Board[i-1][j+1]===0 && i>0 && j<7){
 					possible_enemy_moves[i][j][k] = 2;
 					k++;
 					number_possibilities++;
 				}
-				if(the_Board[i+1][j-1]===0){
+				if(the_Board[i+1][j-1]===0 && i<7 && j>0){
 					possible_enemy_moves[i][j][k] = 3;
 					k++;
 					number_possibilities++;
 				}
-				if(the_Board[i+1][j+1]===0){
+				if(the_Board[i+1][j+1]===0 && i<7 && j<7){
 					possible_enemy_moves[i][j][k] = 4;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i-1][j-1]===faction||faction+2)&&(the_Board[i-2][j-2]===0)){
+				if((the_Board[i-1][j-1]===(faction||faction+2))&&(the_Board[i-2][j-2]===0) && i>1 && j>1){
 					possible_enemy_moves[i][j][k] = 5;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i-1][j+1]===faction||faction+2)&&(the_Board[i-2][j+2]===0)){
+				if((the_Board[i-1][j+1]===(faction||faction+2))&&(the_Board[i-2][j+2]===0) && i>1 && j<6){
 					possible_enemy_moves[i][j][k] = 6;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i+1][j-1]===faction||faction+2)&&(the_Board[i+2][j-2]===0)){
+				if((the_Board[i+1][j-1]===(faction||faction+2))&&(the_Board[i+2][j-2]===0) && i<6 && j>1){
 					possible_enemy_moves[i][j][k] = 7;
 					k++;
 					number_possibilities++;
 				}
-				if((the_Board[i+1][j+1]===faction||faction+2)&&(the_Board[i+2][j+2]===0)){
+				if((the_Board[i+1][j+1]===(faction||faction+2))&&(the_Board[i+2][j+2]===0) && i<6 && j<6){
 					possible_enemy_moves[i][j][k] = 8;
 					k++;
 					number_possibilities++;
