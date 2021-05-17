@@ -55,9 +55,6 @@ function White_Turn(){
 	let input_start_X =0;
 	let input_start_Y =0;
 
-	let input_end_X =0; //can technically be removed, is here for ease of coding. FIX LATER
-	let input_end_Y =0;
-
 	console.log("enemy turn");
 	console.table(the_Board);
 
@@ -92,65 +89,49 @@ function White_Turn(){
 	switch(chosen_move){
 		case 1:
 			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
-
+				Move_This_To_That(input_start_X, sinput_start_Y, -1, -1); 
 				console.log("AI is not retarded (1)");
 			}
 		break;
 		case 2:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
-
+				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X-1, input_start_Y+1); 
 				console.log("AI is not retarded (2)");
 			}
 		break;
 		case 3:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
-
+				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X+1, input_start_Y-1); 
 				console.log("AI is not retarded (3)");
 			}
 		break;
 		case 4:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
-
+				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X+1, input_start_Y+1); 
 				console.log("AI is not retarded (4)");
 			}
 		break;
 
 		case 5:
 			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
 
 				console.log("AI is not retarded (5)");
 			}
 		break;
 		case 6:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
 
 				console.log("AI is not retarded (6)");
 			}
 		break;
 		case 7:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
 
 				console.log("AI is not retarded (7)");
 			}
 		break;
 		case 8:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				let input_end_X =0;
-				let input_end_Y =0;
 
 				console.log("AI is not retarded (8)");
 			}
@@ -251,23 +232,24 @@ function Catalogue_all_moves(faction){
 	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
-function Move_This_To_That(start_X, start_Y, end_X, end_Y){//swaps positions of 2 tokens
+function Move_This_To_That(start_X, start_Y, right, down){//right and down are +-1
 	//base movement only if not killing
-	let temp = the_Board[start_X][start_Y];
-	
-	if(the_Board[end_X][end_Y] === 0){
-		the_Board[start_X][start_Y] = the_Board[end_X][end_Y];
-	}
-	else{
-		the_Board[start_X][start_Y] = 0;
-	}
-	
-	the_Board[end_X][end_Y] = temp;
+	let temp = the_Board[start_X][start_Y];	
+	the_Board[start_X][start_Y] = 0;
+	the_Board[start_X+right][start_Y+down] = temp;
+
 	if (turn === 0){
 		turn = 1
 	}else{
 		turn = 0;
 	}
+}
+function Move_This_To_That_Agressively(start_X, start_Y, right, down){//right and down are +-1
+	
+	let temp = the_Board[start_X][start_Y];	
+	the_Board[start_X][start_Y] = 0;
+	the_Board[start_X+right][start_Y+down] = 0;	
+	the_Board[start_X+2*right][start_Y+2*down] = temp;
 }
 
 function makeArray(w, h, d, val) {
