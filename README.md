@@ -9,3 +9,5 @@ Black moves first. Players take turns moving one checker per turn. A piece can m
 ![截屏2021-05-18 上午10 45 12](https://user-images.githubusercontent.com/74135859/118621847-6f65fc00-b7cf-11eb-8038-a95b537ee9fa.png)
 # WINNING !
 A player wins the game when the opponent cannot make a move. Usually, this is because all of the opponent’s pieces have been captured, but sometimes it is because the opponent has no space to move onto (he is “blocked” from moving).
+# DEMO
+http://127.0.0.1:5500/index.html
