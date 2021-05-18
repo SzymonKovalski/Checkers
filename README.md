@@ -10,4 +10,4 @@ Black moves first. Players take turns moving one checker per turn. A piece can m
 # WINNING !
 A player wins the game when the opponent cannot make a move. Usually, this is because all of the opponent’s pieces have been captured, but sometimes it is because the opponent has no space to move onto (he is “blocked” from moving).
 # DEMO
-[Checkers](http://127.0.0.1:5500/index.html)
+[Checkers](https://raw.githubusercontent.com/SzymonKovalski/Whatever-the-hell-shems-wants/main/checkers/index.html)
