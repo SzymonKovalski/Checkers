@@ -1,7 +1,11 @@
-rules:
-1. 1 piece moves per turn. diagonaly by 1 when not killing an opponent. diagonally by 2 over an enemy to kill it.
-![image](https://user-images.githubusercontent.com/71707685/117286485-ee734000-ae71-11eb-84c5-3cbccfb3a234.png)
-
-5. pieces can only move towards the enemy side. kings can go whatever direction they want
-6. a pieces that reaches the opposite side of the board turns into a king
-7. the last piece standing wins
+# what is the rule ?
+1. Moves are allowed only on the black squares.
+2. pieces only move diagonally forward toward the opponent .
+3. When the chess piece moves to the bottom of the opponent's board, it becomes the king.
+4. as you’ll see，kings can also move backwards.
+5. A piece may only move one square unless it is making a jump.
+# how to play
+Black moves first. Players take turns moving one checker per turn. A piece can move one space sideways,forward, or diagonally towards the opposing home space. It CANNOT move backwards towards it own home space. (Kings can, as you’ll see.)
+![Checkers](https://i.loli.net/2021/05/18/KXzCV2id3oAZbI7.png)
+# WINNING!!!
+A player wins the game when the opponent cannot make a move. Usually, this is because all of the opponent’s pieces have been captured, but sometimes it is because the opponent has no space to move onto (he is “blocked” from moving).
