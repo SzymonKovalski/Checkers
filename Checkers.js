@@ -95,19 +95,19 @@ function White_Turn(){
 		break;
 		case 2:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X-1, input_start_Y+1); 
+				Move_This_To_That(input_start_X, sinput_start_Y, -1, +1); 
 				console.log("AI is not retarded (2)");
 			}
 		break;
 		case 3:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X+1, input_start_Y-1); 
+				Move_This_To_That(input_start_X, sinput_start_Y, +1, -1); 
 				console.log("AI is not retarded (3)");
 			}
 		break;
 		case 4:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, sinput_start_Y, input_start_X+1, input_start_Y+1); 
+				Move_This_To_That(input_start_X, sinput_start_Y, +1, +1); 
 				console.log("AI is not retarded (4)");
 			}
 		break;
