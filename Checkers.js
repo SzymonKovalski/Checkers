@@ -46,7 +46,7 @@ function Black_Turn(){
 		let input_end_X = prompt("Enter X pos of where to move");
 		let input_end_Y = prompt("Enter Y pos of where to move");
 		//check if you can move there by the rules	
-			Move_This_To_That(input_start_X, input_start_Y, 1, -1);
+			Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 	}
 }
 //white turn version. do AI with this one
