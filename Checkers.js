@@ -19,7 +19,6 @@ var the_Board = [
 
 //black go first
 var turn = 0;
-
 //turn system
 while (true){
 	if (turn === 0){
@@ -51,7 +50,6 @@ function Black_Turn(){
 }
 //white turn version. do AI with this one
 function White_Turn(){
-
 	let input_start_X =0;
 	let input_start_Y =0;
 
@@ -91,57 +89,58 @@ function White_Turn(){
 	switch(chosen_move){
 		case 5:
 			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-
+				Move_This_To_That_Agressively(input_start_X, input_start_Y, -1, -1); 
 				console.log("AI is not retarded (5)");
 			}
 			break;
 		case 6:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-
+				Move_This_To_That_Agressively(input_start_X, input_start_Y, +1, -1); 
 				console.log("AI is not retarded (6)");
 			}
 			break;
 		case 7:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-
+				Move_This_To_That_Agressively(input_start_X, input_start_Y, -1, +1); 
 				console.log("AI is not retarded (7)");
 			}
 			break;
 		case 8:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-
+				Move_This_To_That_Agressively(input_start_X, input_start_Y, +1, +1); 
 				console.log("AI is not retarded (8)");
 			}
 			break;
 
 		case 1:
 			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, input_start_X-1, input_start_Y-1); 
+				Move_This_To_That(input_start_X, input_start_Y, -1, -1); 
 				console.log("AI is not retarded (1)");
 			}
 			break;
 		case 2:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, input_start_X+1, input_start_Y-1); 
+				Move_This_To_That(input_start_X, input_start_Y, +1, -1); 
 				console.log("AI is not retarded (3)");
 			}
 			break;
 		case 3:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, input_start_X-1, input_start_Y+1); 
+				Move_This_To_That(input_start_X, input_start_Y, -1, +1); 
 				console.log("AI is not retarded (2)");
 			}
 			break;
-		default:
+		case 4:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, input_start_X+1, input_start_Y+1); 
+				Move_This_To_That(input_start_X, input_start_Y, +1, +1); 
 				console.log("AI is not retarded (4)");
 			}
 			break;
+		default:
 
-		
+			// win mechanism here
+			break;
 	}
-	turn = 0;
 }
 var possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, third is list of moves
 //8 move variations. if any slot != 0 can move
@@ -233,7 +232,10 @@ function Catalogue_all_moves(){
 	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
-function Move_This_To_That(start_X, start_Y, end_X, end_Y){//right and down are +-1
+function Move_This_To_That(start_X, start_Y, right, down){//right and down are +-1
+	let end_X = start_X+right;
+	let end_Y = start_Y+down;
+
 	//base movement only if not killing
 	let temp = the_Board[start_X][start_Y];	
 	the_Board[start_X][start_Y] = 0;
