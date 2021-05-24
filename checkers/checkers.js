@@ -259,7 +259,10 @@ function enableNextPlayer(piece) {
     }
 }
 //reset game when reset button is pressed
-let resetGame = document.getElementById("resetGame");
-resetGame.onclick = function () {
-    return location.reload();
+function resetGame() {
+    let rG = document.getElementById("resetGame");
+    rG.onclick = function () {
+        return location.reload();
+    }
 }
+resetGame();
