@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # What is the rule ?
 1. Moves are allowed only on the black squares.
 2. pieces only move diagonally forward toward the opponent .
@@ -10,3 +11,4 @@ Black moves first. Players take turns moving one checker per turn. A piece can m
 A player wins the game when the opponent cannot make a move. Usually, this is because all of the opponent’s pieces have been captured, but sometimes it is because the opponent has no space to move onto (he is “blocked” from moving).
 # DEMO
 [Checkers]()
+
