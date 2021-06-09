@@ -16,11 +16,11 @@ var the_Board = [
   [1,0,1,0,1,0,1,0]
 ];
 
-
+var winner = 0;
 //black go first
 var turn = 0;
 //turn system
-while (true){
+while (winner === 0){
 	if (turn === 0){
 		Black_Turn();
 	}else{
@@ -37,15 +37,27 @@ function Black_Turn(){
 
 	console.log("your turn");
 	console.table(the_Board);
-
+	display_Board();
+	
 	let input_start_X = prompt("Enter X pos of your token",[0]); // this can be done better
 	let input_start_Y = prompt("Enter Y pos of your token",[0]);
-	if (the_Board[input_start_X][input_start_Y] === 1){ // only if you enter your token coordinates you move
+	if (the_Board[input_start_X][input_start_Y] === 1||3){ // only if you enter your token coordinates you move
 		//put where you can move to here
-		let input_end_X = prompt("Enter X pos of where to move");
-		let input_end_Y = prompt("Enter Y pos of where to move");
-		//check if you can move there by the rules	
-			Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
+		if(prompt("are you killing, son?",[false]) != true){
+			let input_end_X = prompt("do you want to move to the right?",[0]); // this can be done better
+			//let input_end_Y = prompt("do you want to move up??",[0]); //check if you can move there by the rules	
+			if(the_Board[input_start_X+input_end_X][input_start_Y+1]==2||4){
+				Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
+			}
+		}else{
+			let input_end_X = prompt("do you want to move to the right?",[0]); // this can be done better
+			let input_end_Y = prompt("do you want to move up??",[0]); //check if you can move there by the rules	
+			if(the_Board[input_start_X+input_end_X][input_start_Y+input_end_Y]===2||4){
+				Move_This_To_That_Aggresively(input_start_X, input_start_Y, input_end_X, input_end_Y);
+			}
+		}
+	} else{
+		prompt("that is not your token")
 	}
 }
 //white turn version. do AI with this one
@@ -54,7 +66,7 @@ function White_Turn(){
 	let input_start_Y =0;
 
 	console.log("enemy turn");
-	console.table(the_Board);
+	//console.table(the_Board);
 
 	Catalogue_all_moves();//either 0 for player or 1 for enemies
 
@@ -137,7 +149,7 @@ function White_Turn(){
 			}
 			break;
 		default:
-
+			winner = 1;
 			// win mechanism here
 			break;
 	}
@@ -267,4 +279,21 @@ function makeArray(w, h, d, val) {
         }
     }
     return arr;
+}
+
+function display_Board (){
+	let id = 0;
+	for(let row = 0; row<8;row++){
+		for(let square = 0; square<8;square++){
+			switch(the_Board[row][square]){
+				case 1:
+					document.getElementById(id).className = 'black-piece';
+				break;
+				default:
+					document.getElementById(id).className = 'noPieceHere';
+				break;
+			}
+			id++;
+		}
+	}
 }
