@@ -50,9 +50,8 @@ function Black_Turn(){
 			if(the_Board[input_start_X - 1][input_start_Y + input_end_Y]===0){
 				Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 			}
-		prompt("that is not your token")
-	}
-	
+		
+	} else prompt("that is not your token")
 }
 //white turn version. do AI with this one
 function White_Turn(){
@@ -295,7 +294,7 @@ function display_Board (){
 					document.getElementById(id).className = document.getElementById(id).className.replace('red-piece');
 				break;
 				default:
-					document.getElementById(id).className = 'noPieceHere';
+					document.getElementById(id).className = document.getElementById(id).className.replace('noPieceHere');
 				break;
 			}
 			id++;
