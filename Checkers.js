@@ -24,7 +24,7 @@ while (winner === 0){
 	if (turn === 0){
 		Black_Turn();
 	}else{
-		White_Turn();
+		//White_Turn();
 	}
 }
 
@@ -38,27 +38,21 @@ function Black_Turn(){
 	console.log("your turn");
 	console.table(the_Board);
 	display_Board();
-	
+
 	let input_start_X = prompt("Enter X pos of your token",[0]); // this can be done better
 	let input_start_Y = prompt("Enter Y pos of your token",[0]);
-	if (the_Board[input_start_X][input_start_Y] === 1||3){ // only if you enter your token coordinates you move
+
+	if (the_Board[input_start_X][input_start_Y] == 1||3){ // only if you enter your token coordinates you move
 		//put where you can move to here
-		if(prompt("are you killing, son?",[false]) != true){
-			let input_end_X = prompt("do you want to move to the right?",[0]); // this can be done better
-			//let input_end_Y = prompt("do you want to move up??",[0]); //check if you can move there by the rules	
-			if(the_Board[input_start_X+input_end_X][input_start_Y+1]==2||4){
+		
+			let input_end_Y = prompt("do you want to move to the right?",[1]); // this can be done better
+			let input_end_X = -1; //= prompt("do you want to move up??",[0]);
+			if(the_Board[input_start_X - 1][input_start_Y + input_end_Y]===0){
 				Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 			}
-		}else{
-			let input_end_X = prompt("do you want to move to the right?",[0]); // this can be done better
-			let input_end_Y = prompt("do you want to move up??",[0]); //check if you can move there by the rules	
-			if(the_Board[input_start_X+input_end_X][input_start_Y+input_end_Y]===2||4){
-				Move_This_To_That_Aggresively(input_start_X, input_start_Y, input_end_X, input_end_Y);
-			}
-		}
-	} else{
 		prompt("that is not your token")
 	}
+	
 }
 //white turn version. do AI with this one
 function White_Turn(){
@@ -66,7 +60,7 @@ function White_Turn(){
 	let input_start_Y =0;
 
 	console.log("enemy turn");
-	//console.table(the_Board);
+	console.table(the_Board);
 
 	Catalogue_all_moves();//either 0 for player or 1 for enemies
 
@@ -128,24 +122,31 @@ function White_Turn(){
 			if(the_Board[input_start_X-1][input_start_Y-1]===0){
 				Move_This_To_That(input_start_X, input_start_Y, -1, -1); 
 				console.log("AI is not retarded (1)");
+				turn = 0;
 			}
 			break;
 		case 2:
 			if(the_Board[input_start_X+1][input_start_Y-1]===0){
 				Move_This_To_That(input_start_X, input_start_Y, +1, -1); 
 				console.log("AI is not retarded (3)");
+				turn = 0;
+
 			}
 			break;
 		case 3:
 			if(the_Board[input_start_X-1][input_start_Y+1]===0){
 				Move_This_To_That(input_start_X, input_start_Y, -1, +1); 
 				console.log("AI is not retarded (2)");
+				turn = 0;
+
 			}
 			break;
 		case 4:
 			if(the_Board[input_start_X+1][input_start_Y+1]===0){
 				Move_This_To_That(input_start_X, input_start_Y, +1, +1); 
 				console.log("AI is not retarded (4)");
+				turn = 0;
+
 			}
 			break;
 		default:
@@ -252,12 +253,13 @@ function Move_This_To_That(start_X, start_Y, right, down){//right and down are +
 	let temp = the_Board[start_X][start_Y];	
 	the_Board[start_X][start_Y] = 0;
 	the_Board[end_X][end_Y] = temp;
-
+/*
 	if (turn === 0){
-		turn = 1
+		turn = 1;
 	}else{
 		turn = 0;
 	}
+	*/
 }
 function Move_This_To_That_Agressively(start_X, start_Y, right, down){//right and down are +-1
 	
@@ -287,7 +289,10 @@ function display_Board (){
 		for(let square = 0; square<8;square++){
 			switch(the_Board[row][square]){
 				case 1:
-					document.getElementById(id).className = 'black-piece';
+					document.getElementById(id).className = document.getElementById(id).className.replace('black-piece');
+				break;
+				case 2:
+					document.getElementById(id).className = document.getElementById(id).className.replace('red-piece');
 				break;
 				default:
 					document.getElementById(id).className = 'noPieceHere';
