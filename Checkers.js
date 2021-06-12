@@ -5,7 +5,7 @@
 
 // ||x
 // \/ y-> 
-var the_Board = [
+let the_Board = [
   [0,2,0,2,0,2,0,2],
   [2,0,2,0,2,0,2,0],
   [0,2,0,2,0,2,0,2],
@@ -24,7 +24,7 @@ while (winner === 0){
 	if (turn === 0){
 		Black_Turn();
 	}else{
-		//White_Turn();
+		White_Turn();
 	}
 }
 
@@ -91,70 +91,35 @@ function White_Turn(){
 	console.log(input_start_X);
 	console.log(input_start_Y);
 	console.log(chosen_move);
-	switch(chosen_move){
-		case 5:
-			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-				Move_This_To_That_Agressively(input_start_X, input_start_Y, -1, -1); 
-				console.log("AI is not retarded (5)");
-			}
-			break;
-		case 6:
-			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				Move_This_To_That_Agressively(input_start_X, input_start_Y, +1, -1); 
-				console.log("AI is not retarded (6)");
-			}
-			break;
-		case 7:
-			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				Move_This_To_That_Agressively(input_start_X, input_start_Y, -1, +1); 
-				console.log("AI is not retarded (7)");
-			}
-			break;
-		case 8:
-			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				Move_This_To_That_Agressively(input_start_X, input_start_Y, +1, +1); 
-				console.log("AI is not retarded (8)");
-			}
-			break;
-
-		case 1:
-			if(the_Board[input_start_X-1][input_start_Y-1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, -1, -1); 
-				console.log("AI is not retarded (1)");
-				turn = 0;
-			}
-			break;
-		case 2:
-			if(the_Board[input_start_X+1][input_start_Y-1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, +1, -1); 
-				console.log("AI is not retarded (3)");
-				turn = 0;
-
-			}
-			break;
-		case 3:
-			if(the_Board[input_start_X-1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, -1, +1); 
-				console.log("AI is not retarded (2)");
-				turn = 0;
-
-			}
-			break;
-		case 4:
-			if(the_Board[input_start_X+1][input_start_Y+1]===0){
-				Move_This_To_That(input_start_X, input_start_Y, +1, +1); 
-				console.log("AI is not retarded (4)");
-				turn = 0;
-
-			}
-			break;
-		default:
-			winner = 1;
-			// win mechanism here
-			break;
+	if(the_Board[input_start_X + chooseMoveX[chosen_move][input_start_Y + chooseMoveY[chosen_move] === 0){
+		Move_This_To_That(input_start_X, input_start_Y, chooseMoveX[chosen_move], chooseMoveY[chosen_move]);
+		console.log("AI is not retarded ",chosen_move) ;
 	}
+//
 }
-var possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, third is list of moves
+const chooseMoveX = {
+	0: 0
+	1: -1
+	2: -1
+	3: +1
+	4: +1
+	5: -1
+	6: -1
+	7: +1
+	8: +1
+}
+const chooseMoveY = {
+	0: 0
+	1: -1
+	2: +1
+	3: -1
+	4: +1
+	5: -1
+	6: +1
+	7: -1
+	8: +1
+}
+let possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, third is list of moves
 //8 move variations. if any slot != 0 can move
 /*
 5       6
@@ -163,7 +128,7 @@ var possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, 
   3   4
 7       8
 */
-var number_possibilities = 0;
+let number_possibilities = 0;
 function Catalogue_all_moves(){
 	possible_enemy_moves = makeArray(8, 8, 4, 0);
 	
@@ -252,13 +217,13 @@ function Move_This_To_That(start_X, start_Y, right, down){//right and down are +
 	let temp = the_Board[start_X][start_Y];	
 	the_Board[start_X][start_Y] = 0;
 	the_Board[end_X][end_Y] = temp;
-/*
+
 	if (turn === 0){
 		turn = 1;
 	}else{
 		turn = 0;
 	}
-	*/
+	
 }
 function Move_This_To_That_Agressively(start_X, start_Y, right, down){//right and down are +-1
 	
@@ -281,23 +246,25 @@ function makeArray(w, h, d, val) {
     }
     return arr;
 }
+function displayClass(type){
+	switch(type){
+		case 1: return 'black-piece';	
+		case 2: return 'red-piece';
+		}
+	return 'noPieceHere';
 
+}
 function display_Board (){
 	let id = 0;
+
 	for(let row = 0; row<8;row++){
 		for(let square = 0; square<8;square++){
-			switch(the_Board[row][square]){
-				case 1:
-					document.getElementById(id).className = document.getElementById(id).className.replace('black-piece');
-				break;
-				case 2:
-					document.getElementById(id).className = document.getElementById(id).className.replace('red-piece');
-				break;
-				default:
-					document.getElementById(id).className = document.getElementById(id).className.replace('noPieceHere');
-				break;
-			}
+			const doc = document.getElementById(id);
+			const { classname  } = doc
+
+			doc.className = className.replace(displayClass(the_Board[row][square]));
 			id++;
 		}
 	}
 }
+
