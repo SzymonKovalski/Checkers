@@ -15,11 +15,11 @@ let the_Board = [
   [0,1,0,1,0,1,0,1],
   [1,0,1,0,1,0,1,0]
 ];
-
 var winner = 0;
 //black go first
 var turn = 0;
 //turn system
+/*
 while (winner === 0){
 	if (turn === 0){
 		Black_Turn();
@@ -27,10 +27,7 @@ while (winner === 0){
 		White_Turn();
 	}
 }
-
-
-
-
+*/
 
 //player turn version
 function Black_Turn(){
@@ -45,11 +42,14 @@ function Black_Turn(){
 	if (the_Board[input_start_X][input_start_Y] == 1||3){ // only if you enter your token coordinates you move
 		//put where you can move to here
 		
-			let input_end_Y = prompt("do you want to move to the right?",[1]); // this can be done better
-			let input_end_X = -1; //= prompt("do you want to move up??",[0]);
-			if(the_Board[input_start_X - 1][input_start_Y + input_end_Y]===0){
+		let input_end_Y = prompt("do you want to move to the right?",[1]); // this can be done better
+		let input_end_X = -1; //= prompt("do you want to move up??",[0]);
+		if(the_Board[input_start_X - 1][input_start_Y + input_end_Y]===0){
+			try{
 				Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 			}
+			White_Turn();
+		}
 		
 	} else prompt("that is not your token")
 }
