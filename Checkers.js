@@ -20,7 +20,7 @@ const theBoard = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0],
 	[0, wwhite, 0, wwhite, 0, wwhite, 0, wwhite],
-	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
+  	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
 ];
 
 //const winner = 0;
@@ -128,9 +128,14 @@ function whiteTurn() {
 	const checkX = inputStartX + chooseMoveX[chosenMove];
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
-		moveThisToThat(inputStartX, inputStartY,
-			chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
-		console.log('AI is not retarded ', chosenMove);
+		// eslint-disable-next-line no-constant-condition
+		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
+			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
+			console.log('AI is not retarded ', chosenMove);
+		} else {
+			moveThisToThatAgressively(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
+			console.log('AI is not retarded ', chosenMove);
+		}
 	}
 	//
 }
@@ -162,12 +167,12 @@ function catalogueAllMoves() {
 				k++;
 				numberPossibilities++;
 			}
-			if ((theBoard[i + 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j > 0) { //peasant code is only working for white. change numbers for black
+			if ((theBoard[i + 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j < 1) {
 				possibleEnemyMoves[i][j][k] = 'leftDownJump';
 				k++;
 				numberPossibilities++;
 			}
-			if ((theBoard[i + 1][j + 1] === (1 || 3)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j > (boardLength - 1)) {
+			if ((theBoard[i + 1][j + 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j < (boardLength - 1)) {
 				possibleEnemyMoves[i][j][k] = 'rightDownJump';
 				k++;
 				numberPossibilities++;
@@ -183,12 +188,12 @@ function catalogueAllMoves() {
 					k++;
 					numberPossibilities++;
 				}
-				if ((theBoard[i - 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 2) && j > (boardLength - 2)) { //peasant code is only working for white. change numbers for black
+				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j > 1) {
 					possibleEnemyMoves[i][j][k] = 'leftUpJump';
 					k++;
 					numberPossibilities++;
 				}
-				if ((theBoard[i - 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 2) && j > (boardLength - 2)) {
+				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j < (boardLength - 2)) {
 					possibleEnemyMoves[i][j][k] = 'rightUpJump';
 					k++;
 					numberPossibilities++;
@@ -196,8 +201,6 @@ function catalogueAllMoves() {
 			}
 		}
 	}
-
-	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
 function moveThisToThat(startX, startY, right, down) { //right and down are +-1
@@ -230,7 +233,7 @@ function makeArray(w, h, d, val) {
 	}
 	return arr;
 }
-
+/*
 function displayClass(type) {
 	switch (type) {
 		case 1:
@@ -241,8 +244,8 @@ function displayClass(type) {
 	return 'noPieceHere';
 
 }
-
-function displayBoard() {
+*/
+/*function displayBoard() {
 	let id = 0;
 
 	for (let row = 0; row < 8; row++) {
@@ -253,4 +256,4 @@ function displayBoard() {
 			id++;
 		}
 	}
-}
+}*/
