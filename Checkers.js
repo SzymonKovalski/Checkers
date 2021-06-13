@@ -50,13 +50,13 @@ function Black_Turn(){
 			try{
 				Move_This_To_That(input_start_X, input_start_Y, input_end_X, input_end_Y);
 			}
-			White_Turn();
+			finally {White_Turn()};
 		}
 		
 	} else prompt("that is not your token")
 }
 //white turn version. do AI with this one
-const boardLength =8;
+const boardLength = 8;
 function White_Turn(){
 	let input_start_X =0;
 	let input_start_Y =0;
@@ -93,33 +93,33 @@ function White_Turn(){
 	console.log(input_start_X);
 	console.log(input_start_Y);
 	console.log(chosen_move);
-	if(theBoard[input_start_X + chooseMoveX[chosen_move][input_start_Y + chooseMoveY[chosen_move] === 0){
+	if(theBoard[input_start_X + chooseMoveX[chosen_move]][input_start_Y + chooseMoveY[chosen_move] === 0]){
 		Move_This_To_That(input_start_X, input_start_Y, chooseMoveX[chosen_move], chooseMoveY[chosen_move]);
 		console.log("AI is not retarded ",chosen_move) ;
 	}
 //
 }
 const chooseMoveX = {
-	0: 0
-	1: -1
-	2: -1
-	3: +1
-	4: +1
-	5: -1
-	6: -1
-	7: +1
-	8: +1
+	0: 0,
+	'leftUp': -1,
+	'rightUp': -1,
+	'leftDown': +1,
+	'rightDown': +1,
+	'leftUpJump': -1,
+	'rightUpJump': -1,
+	'leftDownJump': +1,
+	'rightDownJump': +1,
 }
 const chooseMoveY = {
-	0: 0
-	1: -1
-	2: +1
-	3: -1
-	4: +1
-	5: -1
-	6: +1
-	7: -1
-	8: +1
+	0: 0,
+	'leftUp': -1,
+	'rightUp': +1,
+	'leftDown': -1,
+	'rightDown': +1,
+	'leftUpJump': -1,
+	'rightUpJump': +1,
+	'leftDownJump': -1,
+	'rightDownJump': +1,
 }
 let possible_enemy_moves = makeArray(8, 8, 4, 0);//first 2 var are coordinates, third is list of moves
 //8 move variations. if any slot != 0 can move
