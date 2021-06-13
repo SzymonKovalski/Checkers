@@ -167,12 +167,12 @@ function catalogueAllMoves() {
 				k++;
 				numberPossibilities++;
 			}
-			if ((theBoard[i + 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j > 0) { //peasant code is only working for white. change numbers for black
+			if ((theBoard[i + 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j < 1) {
 				possibleEnemyMoves[i][j][k] = 'leftDownJump';
 				k++;
 				numberPossibilities++;
 			}
-			if ((theBoard[i + 1][j + 1] === (1 || 3)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j > (boardLength - 1)) {
+			if ((theBoard[i + 1][j + 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j < (boardLength - 1)) {
 				possibleEnemyMoves[i][j][k] = 'rightDownJump';
 				k++;
 				numberPossibilities++;
@@ -188,12 +188,12 @@ function catalogueAllMoves() {
 					k++;
 					numberPossibilities++;
 				}
-				if ((theBoard[i - 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 2) && j > (boardLength - 2)) { //peasant code is only working for white. change numbers for black
+				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j > 1) {
 					possibleEnemyMoves[i][j][k] = 'leftUpJump';
 					k++;
 					numberPossibilities++;
 				}
-				if ((theBoard[i - 1][j - 1] === (1 || 3)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 2) && j > (boardLength - 2)) {
+				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j < (boardLength - 2)) {
 					possibleEnemyMoves[i][j][k] = 'rightUpJump';
 					k++;
 					numberPossibilities++;
@@ -201,8 +201,6 @@ function catalogueAllMoves() {
 			}
 		}
 	}
-
-	//maybe do a structure instead of a matrix
 }
 //functiom moves piece
 function moveThisToThat(startX, startY, right, down) { //right and down are +-1
