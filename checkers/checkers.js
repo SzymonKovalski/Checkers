@@ -15,8 +15,7 @@ function createBoard() {
             square.className = ((x + y) % 2) ? 'bblack' : 'bwhite';
 
             // If the square should have a piece in it...
-            // eslint-disable-next-line
-            if ((x + y) % 2 != 0 && y != 3 && y != 4) {
+            if ((x + y) % 2 !== 0 && y !== 3 && y !== 4) {
                 const img = document.createElement('img');
                 if (y < 3) {
                     img.id = 'w' + square.id;
@@ -39,20 +38,16 @@ function allowDrop() {
     // Wire up the target events on all the black squares
     const squares = document.querySelectorAll('.bblack');
 
-
     for (const s of squares) {
-        // eslint-disable-next-line no-undef
-        s.addEventListener('dragover', dragover, false);
+        s.addEventListener('dragover', dragOver, false);
         s.addEventListener('drop', drop, false);
         s.addEventListener('dragenter', dragEnter, false);
         s.addEventListener('dragleave', dragLeave, false);
     }
 
-    // Wire up the source events on all of the images
-    let j = 0;
     const pieces = document.querySelectorAll('img');
-    while (j < pieces.length) {
-        const p = pieces[j++];
+
+    for(const p of pieces){
         p.addEventListener('dragstart', dragStart, false);
         p.addEventListener('dragend', dragEnd, false);
     }
@@ -60,7 +55,6 @@ function allowDrop() {
 createBoard();
 allowDrop();
 // Handle the dragover event
-// eslint-disable-next-line no-unused-vars
 function dragOver(e) {
     e.preventDefault();
     // Get the img element that is being dragged
@@ -96,13 +90,13 @@ function drop(e) {
     // Get the img element that is being dragged
     const droppedID = e.dataTransfer.getData('text');
     const droppedPiece = document.getElementById(droppedID);
-    // eslint-disable-next-line max-len
     if (droppedPiece && e.target.tagName === 'DIV' && isValidMove(droppedPiece, e.target, true)) {
         // Create a new img on the target location
         const newPiece = document.createElement('img');
         newPiece.src = droppedPiece.src;
         newPiece.id = droppedPiece.id.substr(0, 1) + e.target.id;
         newPiece.draggable = droppedPiece.draggable;
+
         if (droppedPiece.draggable) {
             newPiece.classList.add('jumpOnly');
         }
@@ -111,7 +105,7 @@ function drop(e) {
         newPiece.addEventListener('dragend', dragEnd, false);
         e.target.appendChild(newPiece);
 
-        // Remove the previous image
+        // Remove the pre image
         droppedPiece.parentNode.removeChild(droppedPiece);
         // Remove the drop effect from the target element
         e.target.classList.remove('drop');
@@ -125,8 +119,8 @@ function dragEnter(e) {
     const dragID = e.dataTransfer.getData('text');
     const dragPiece = document.getElementById(dragID);
     const isDIv = e.target.tagName === 'DIV';
-    const isMove = isValidMove(dragPiece, e.target, false);
-    if (dragPiece && isDIv && isMove) {
+     
+    if (dragPiece && isDIv && isValidMove(dragPiece, e.target, false)) {
         e.target.classList.add('drop');
     }
 }
@@ -149,8 +143,7 @@ function isValidMove(source, target, drop) {
         return false;
     }
     // You can't drop on occupied square
-    // eslint-disable-next-line
-    if (target.childElementCount != 0) {
+    if (target.childElementCount !== 0) {
         return false;
     }
 
@@ -169,7 +162,7 @@ function isValidMove(source, target, drop) {
             if (yEnd <= yStart)
                 return false; // Can't move backwards
             break;
-            // For black pieces...
+        // For black pieces...
         case 'b':
             if (yEnd >= yStart)
                 return false; // Can't move backwards
@@ -252,22 +245,14 @@ function enableNextPlayer(piece) {
     while (i < pieces.length) {
         const p = pieces[i++];
         // If this is the same color that just moved, disable dragging
-        if (p.id.substr(0, 1).toUpperCase() ===
-            piece.id.substr(0, 1).toUpperCase()) {
-            p.draggable = false;
-            // eslint-disable-next-line brace-style
-        }
-        // Otherwise, enable dragging
-        else {
-            p.draggable = true;
-        }
+        p.draggable = p.id.substr(0, 1).toUpperCase() !== piece.id.substr(0, 1).toUpperCase();
         p.classList.remove('jumpOnly');
     }
 }
 //reset game when reset button is pressed
 function resetGame() {
     const rG = document.getElementById('resetGame');
-    rG.onclick = function () {
+    rG.onclick = function() {
         return location.reload();
     };
 }
