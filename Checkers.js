@@ -54,7 +54,7 @@ function blackTurn() {
 		//put where you can move to here
 
 		const inputEndY = prompt('do you want to move to the right?', [1]);
-		const inputEndX = -1; 
+		const inputEndX = -1;
 		if (theBoard[inputStartX - 1][inputStartY + inputEndY] === 0) {
 			moveThisToThat(inputStartX, inputStartY, inputEndX, inputEndY);
 			whiteTurn();
@@ -110,7 +110,6 @@ function whiteTurn() {
 					chosenMove = possibleEnemyMoves[i][j][k];
 				}
 			}
-			
 		}
 	}
 
