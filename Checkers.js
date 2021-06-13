@@ -128,6 +128,7 @@ function whiteTurn() {
 	const checkX = inputStartX + chooseMoveX[chosenMove];
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
+		// eslint-disable-next-line no-constant-condition
 		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
 			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
 			console.log('AI is not retarded ', chosenMove);
@@ -234,7 +235,7 @@ function makeArray(w, h, d, val) {
 	}
 	return arr;
 }
-
+/*
 function displayClass(type) {
 	switch (type) {
 		case 1:
@@ -245,7 +246,7 @@ function displayClass(type) {
 	return 'noPieceHere';
 
 }
-
+*/
 /*function displayBoard() {
 	let id = 0;
 
