@@ -20,7 +20,7 @@ const theBoard = [
 	[0, 0, 0, 0, 0, 0, 0, 0],
 	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0],
 	[0, wwhite, 0, wwhite, 0, wwhite, 0, wwhite],
-	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
+  	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
 ];
 
 //const winner = 0;
@@ -128,9 +128,13 @@ function whiteTurn() {
 	const checkX = inputStartX + chooseMoveX[chosenMove];
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
-		moveThisToThat(inputStartX, inputStartY,
-			chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
-		console.log('AI is not retarded ', chosenMove);
+		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
+			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
+			console.log('AI is not retarded ', chosenMove);
+		} else {
+			moveThisToThatAgressively(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
+			console.log('AI is not retarded ', chosenMove);
+		}
 	}
 	//
 }
@@ -242,7 +246,7 @@ function displayClass(type) {
 
 }
 
-function displayBoard() {
+/*function displayBoard() {
 	let id = 0;
 
 	for (let row = 0; row < 8; row++) {
@@ -253,4 +257,4 @@ function displayBoard() {
 			id++;
 		}
 	}
-}
+}*/
