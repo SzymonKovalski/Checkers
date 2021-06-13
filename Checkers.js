@@ -50,17 +50,14 @@ function blackTurn() {
 	const inputStartX = prompt('Enter X pos of your token', [0]);
 	const inputStartY = prompt('Enter Y pos of your token', [0]);
 
-	if (theBoard[inputStartX][inputStartY] === wwhite || Wwhite) {
+	if (theBoard[inputStartX][inputStartY] === wwhite || Wwhite) { // antipattern 7. idiotproof this
 		//put where you can move to here
 
 		const inputEndY = prompt('do you want to move to the right?', [1]);
-		const inputEndX = -1; //= prompt("do you want to move up??",[0]);
+		const inputEndX = -1; 
 		if (theBoard[inputStartX - 1][inputStartY + inputEndY] === 0) {
-			try {
-				moveThisToThat(inputStartX, inputStartY, inputEndX, inputEndY);
-			} finally {
-				whiteTurn();
-			}
+			moveThisToThat(inputStartX, inputStartY, inputEndX, inputEndY);
+			whiteTurn();
 		}
 
 	} else prompt('that is not your token');
@@ -105,19 +102,15 @@ function whiteTurn() {
 	let chosenMove = 0;
 	for (let i = 0; i < boardLength; i++) {
 		for (let j = 0; j < boardLength; j++) {
-			if (theBoard[i][j] === bblack || Bblack) {
-				for (let k = 0; k < 4; k++) {
-					if (possibleEnemyMoves[i][j][k] !== 0) {
-						if (counter < randomNumber) {
-							counter++;
-							inputStartX = i;
-							inputStartY = j;
-							chosenMove = possibleEnemyMoves[i][j][k];
-						}
-
-					}
+			for (let k = 0; k < 4; k++) {
+				if ((possibleEnemyMoves[i][j][k] !== 0) && (theBoard[i][j] === bblack || Bblack) && (counter < randomNumber)) {		//way too long
+					counter++;
+					inputStartX = i;
+					inputStartY = j;
+					chosenMove = possibleEnemyMoves[i][j][k];
 				}
 			}
+			
 		}
 	}
 
@@ -128,7 +121,6 @@ function whiteTurn() {
 	const checkX = inputStartX + chooseMoveX[chosenMove];
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
-		// eslint-disable-next-line no-constant-condition
 		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
 			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
 			console.log('AI is not retarded ', chosenMove);
@@ -137,10 +129,7 @@ function whiteTurn() {
 			console.log('AI is not retarded ', chosenMove);
 		}
 	}
-	//
 }
-
-
 //8 move variations. if any slot != 0 can move
 /*
 leftUpJump      		rightUpJump
@@ -198,7 +187,7 @@ function catalogueAllMoves() {
 					k++;
 					numberPossibilities++;
 				}
-			}
+			} // antipattern 6. if 0 somehow gets in here it wouldd crash.
 		}
 	}
 }
