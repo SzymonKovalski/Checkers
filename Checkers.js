@@ -157,12 +157,12 @@ function catalogueAllMoves() {
 	for (let i = 0; i < boardLength; i++) {
 		for (let j = 0; j < boardLength; j++) {
 			let k = 0;
-			if (theBoard[i + 1][j - 1] === 0 && i < (boardLength - 1) && j > 0) {
+			if (theBoard[i + 1][j - 1] === 0 && i < (boardLength) && j > 0) {
 				possibleEnemyMoves[i][j][k] = 'leftDown';
 				k++;
 				numberPossibilities++;
 			}
-			if (theBoard[i + 1][j + 1] === 0 && i < (boardLength - 1) && j < (boardLength - 1)) {
+			if (theBoard[i + 1][j + 1] === 0 && i < (boardLength - 1) && j < (boardLength)) {
 				possibleEnemyMoves[i][j][k] = 'rightDown';
 				k++;
 				numberPossibilities++;
@@ -183,7 +183,7 @@ function catalogueAllMoves() {
 					k++;
 					numberPossibilities++;
 				}
-				if (theBoard[i - 1][j + 1] === 0 && i < (boardLength - 1) && j < (boardLength - 1)) {
+				if (theBoard[i - 1][j + 1] === 0 && i > 0 && j < (boardLength)) {
 					possibleEnemyMoves[i][j][k] = 'rightUp';
 					k++;
 					numberPossibilities++;
