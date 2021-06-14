@@ -22,7 +22,7 @@ const theBoard = [
 	[0, wwhite, 0, wwhite, 0, wwhite, 0, wwhite],
   	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
 ];
-
+displayBoard();
 //const winner = 0;
 //black go first
 
@@ -291,27 +291,23 @@ function makeArray(w, h, d, val) {
 	}
 	return arr;
 }
-/*
+
 function displayClass(type) {
 	switch (type) {
-		case 1:
-			return 'black-piece';
-		case 2:
-			return 'red-piece';
+		case wwhite: return 'red-piece';
+		case bblack: return 'black-piece';
 	}
 	return 'noPieceHere';
-
 }
-*/
-/*function displayBoard() {
+
+function displayBoard() {
 	let id = 0;
 
 	for (let row = 0; row < 8; row++) {
 		for (let square = 0; square < 8; square++) {
 			const doc = document.getElementById(id);
-
 			doc.className = className.replace(displayClass(theBoard[row][square]));
 			id++;
 		}
 	}
-}*/
+}
