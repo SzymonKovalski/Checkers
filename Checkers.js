@@ -37,6 +37,96 @@ while (winner === 0){
 	}
 }
 */
+const chooseMoveX = {
+	0: 0,
+	'leftUp': -1,
+	'rightUp': -1,
+	'leftDown': +1,
+	'rightDown': +1,
+	'leftUpJump': -1,
+	'rightUpJump': -1,
+	'leftDownJump': +1,
+	'rightDownJump': +1,
+};
+const chooseMoveY = {
+	0: 0,
+	'leftUp': -1,
+	'rightUp': +1,
+	'leftDown': -1,
+	'rightDown': +1,
+	'leftUpJump': -1,
+	'rightUpJump': +1,
+	'leftDownJump': -1,
+	'rightDownJump': +1,
+};
+const boardLength = 8;
+createButtons1();
+function createButtons1() {
+	for (let i = 0; i < 64; i++) {
+		const element = document.getElementById(i);
+		if (element.className === 'black-piece') {
+			element.addEventListener('click', e => {
+				const startCordinates = calculateCoordinatesFromId(e.target.id);
+				createButtons2(startCordinates);
+			});
+		}
+	}
+}
+function calculateCoordinatesFromId(id) {
+	let currentId = 0;
+	for (let i = 0; i < boardLength; i++) {
+		for (let j = 0; j < boardLength; j++) {
+			currentId++;
+			if (currentId === id) {
+				const location = [i, j];
+				return location;
+			}
+		}
+	}
+}
+function calculateIdFromCoordinates(coordinates) {
+	const id = 8 * coordinates[0] + coordinates[1];
+	return id;
+}
+const moveNames = {
+	0: 'leftUp',
+	1: 'rightUp',
+	2: 'leftDown',
+	3: 'rightDown',
+	4: 'leftUpJump',
+	5: 'rightUpJump',
+	6: 'leftDownJump',
+	7: 'rightDownJump'
+};
+function createButtons2(startCoordinates) {
+	// eslint-disable-next-line prefer-const
+	let coordsToDraw = [
+		[0, 0],
+		[0, 0],
+		[0, 0],
+		[0, 0]
+];
+	let k = 0;
+
+	for (let i = 0; i < moveNames.length; i++) {
+		const moveName = moveNames[i];
+		const potentialCoordX = startCoordinates + chooseMoveX[moveName];
+		const potentialCoordY = startCoordinates + chooseMoveY[moveName];
+		if (theBoard[potentialCoordX][potentialCoordY] === 0) {
+			coordsToDraw[0][k] = potentialCoordX;
+			coordsToDraw[1][k] = potentialCoordY;
+			k++;
+			calculateIdFromCoordinates();
+		} else if (theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) {
+			coordsToDraw[0][k] = potentialCoordX;
+			coordsToDraw[1][k] = potentialCoordY;
+			k++;
+			calculateIdFromCoordinates();
+		}
+	}
+} // garbage
+
+
 
 //player turn version
 blackTurn();
@@ -63,29 +153,8 @@ function blackTurn() {
 	} else prompt('that is not your token');
 }
 //white turn version. do AI with this one
-const chooseMoveX = {
-	0: 0,
-	'leftUp': -1,
-	'rightUp': -1,
-	'leftDown': +1,
-	'rightDown': +1,
-	'leftUpJump': -1,
-	'rightUpJump': -1,
-	'leftDownJump': +1,
-	'rightDownJump': +1,
-};
-const chooseMoveY = {
-	0: 0,
-	'leftUp': -1,
-	'rightUp': +1,
-	'leftDown': -1,
-	'rightDown': +1,
-	'leftUpJump': -1,
-	'rightUpJump': +1,
-	'leftDownJump': -1,
-	'rightDownJump': +1,
-};
-const boardLength = 8;
+
+
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
 let numberPossibilities = 0;
 
@@ -120,6 +189,7 @@ function whiteTurn() {
 	const checkX = inputStartX + chooseMoveX[chosenMove];
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
+		// eslint-disable-next-line no-constant-condition
 		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
 			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
 			console.log('AI is not retarded ', chosenMove);
