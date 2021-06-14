@@ -23,6 +23,7 @@ const theBoard = [
   	[wwhite, 0, wwhite, 0, wwhite, 0, wwhite, 0]
 ];
 displayBoard();
+createButtons1();
 //const winner = 0;
 //black go first
 
@@ -60,7 +61,7 @@ const chooseMoveY = {
 	'rightDownJump': +1,
 };
 const boardLength = 8;
-createButtons1();
+
 function createButtons1() {
 	for (let i = 0; i < 64; i++) {
 		const element = document.getElementById(i);
@@ -105,8 +106,8 @@ function createButtons2(startCoordinates) {
 ];
 	for (let i = 0; i < moveNames.length; i++) {
 		const moveName = moveNames[i];
-		const potentialCoordX = startCoordinates + chooseMoveX[moveName];
-		const potentialCoordY = startCoordinates + chooseMoveY[moveName];
+		const potentialCoordX = startCoordinates[0] + chooseMoveX[moveName];
+		const potentialCoordY = startCoordinates[1] + chooseMoveY[moveName];
 		if (theBoard[potentialCoordX][potentialCoordY] === 0) {
 			coordsToDraw[0] = potentialCoordX;
 			coordsToDraw[1] = potentialCoordY;
@@ -114,12 +115,14 @@ function createButtons2(startCoordinates) {
 			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
-				console.log(e);
-				moveThisToThat();
+				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
+				const direction1 = elementCoordinates[0] - startCoordinates[0];
+				const direction2 = elementCoordinates[1] - startCoordinates[1];
+				moveThisToThat(startCoordinates[0], startCoordinates[1], direction1, direction2); // compact this
 				//clear board
-				//display board
-				// white turn
-				//createButtons1
+				displayBoard();
+				aiMove();
+				createButtons1();
 			});
 		}
 		if ((theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) &&
@@ -130,11 +133,13 @@ function createButtons2(startCoordinates) {
 			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
-				console.log(e);
-				moveThisToThatAgressively();
+				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
+				const direction1 = elementCoordinates[0] - startCoordinates[0];
+				const direction2 = elementCoordinates[1] - startCoordinates[1];
+				moveThisToThatAgressively(startCoordinates[0], startCoordinates[1], direction1, direction2);
 				//clear board
-				//display board
-				//createButtons1
+				displayBoard();
+				createButtons1();
 			});
 		}
 	}
@@ -167,12 +172,9 @@ function blackTurn() {
 	} else prompt('that is not your token');
 }
 //white turn version. do AI with this one
-
-
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
 let numberPossibilities = 0;
-
-function whiteTurn() {
+function aiMove() {
 	let inputStartX = 0;
 	let inputStartY = 0;
 
@@ -270,7 +272,7 @@ function catalogueAllMoves() {
 					k++;
 					numberPossibilities++;
 				}
-			} // antipattern 6. if 0 somehow gets in here it wouldd crash.
+			}
 		}
 	}
 }
