@@ -118,6 +118,7 @@ function createButtons2(startCoordinates) {
 				moveThisToThat();
 				//clear board
 				//display board
+				// white turn
 				//createButtons1
 			});
 		}
@@ -137,7 +138,7 @@ function createButtons2(startCoordinates) {
 			});
 		}
 	}
-} // garbage
+}
 
 
 
