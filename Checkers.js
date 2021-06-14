@@ -101,27 +101,40 @@ const moveNames = {
 function createButtons2(startCoordinates) {
 	// eslint-disable-next-line prefer-const
 	let coordsToDraw = [
-		[0, 0],
-		[0, 0],
-		[0, 0],
 		[0, 0]
 ];
-	let k = 0;
-
 	for (let i = 0; i < moveNames.length; i++) {
 		const moveName = moveNames[i];
 		const potentialCoordX = startCoordinates + chooseMoveX[moveName];
 		const potentialCoordY = startCoordinates + chooseMoveY[moveName];
 		if (theBoard[potentialCoordX][potentialCoordY] === 0) {
-			coordsToDraw[0][k] = potentialCoordX;
-			coordsToDraw[1][k] = potentialCoordY;
+			coordsToDraw[0] = potentialCoordX;
+			coordsToDraw[1] = potentialCoordY;
 			k++;
-			calculateIdFromCoordinates();
-		} else if (theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) {
-			coordsToDraw[0][k] = potentialCoordX;
-			coordsToDraw[1][k] = potentialCoordY;
+			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
+			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
+			element.addEventListener('click', e => {
+				console.log(e);
+				moveThisToThat();
+				//clear board
+				//display board
+				//createButtons1
+			});
+		}
+		if ((theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) &&
+		(theBoard[potentialCoordX + chooseMoveX[moveName]][potentialCoordY + chooseMoveY[moveName]] === 0)) {
+			coordsToDraw[0] = potentialCoordX;
+			coordsToDraw[1] = potentialCoordY;
 			k++;
-			calculateIdFromCoordinates();
+			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
+			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
+			element.addEventListener('click', e => {
+				console.log(e);
+				moveThisToThatAgressively();
+				//clear board
+				//display board
+				//createButtons1
+			});
 		}
 	}
 } // garbage
