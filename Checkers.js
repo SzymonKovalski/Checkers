@@ -24,20 +24,6 @@ const theBoard = [
 ];
 displayBoard();
 createButtons1();
-//const winner = 0;
-//black go first
-
-/*var turn = 0;
-//turn system
-
-while (winner === 0){
-	if (turn === 0){
-		Black_Turn();
-	}else{
-		White_Turn();
-	}
-}
-*/
 const chooseMoveX = {
 	0: 0,
 	'leftUp': -1,
@@ -49,7 +35,7 @@ const chooseMoveX = {
 	'leftDownJump': +1,
 	'rightDownJump': +1,
 };
-const chooseMoveY = {
+const chooseMoveY = {	//all of those might be shortened
 	0: 0,
 	'leftUp': -1,
 	'rightUp': +1,
@@ -59,6 +45,16 @@ const chooseMoveY = {
 	'rightUpJump': +1,
 	'leftDownJump': -1,
 	'rightDownJump': +1,
+};
+const moveNames = {
+	0: 'leftUp',
+	1: 'rightUp',
+	2: 'leftDown',
+	3: 'rightDown',
+	4: 'leftUpJump',
+	5: 'rightUpJump',
+	6: 'leftDownJump',
+	7: 'rightDownJump'
 };
 const boardLength = 8;
 
@@ -89,16 +85,7 @@ function calculateIdFromCoordinates(coordinates) {
 	const id = 8 * coordinates[0] + coordinates[1];
 	return id;
 }
-const moveNames = {
-	0: 'leftUp',
-	1: 'rightUp',
-	2: 'leftDown',
-	3: 'rightDown',
-	4: 'leftUpJump',
-	5: 'rightUpJump',
-	6: 'leftDownJump',
-	7: 'rightDownJump'
-};
+
 function createButtons2(startCoordinates) {
 	// eslint-disable-next-line prefer-const
 	let coordsToDraw = [
