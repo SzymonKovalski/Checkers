@@ -109,15 +109,15 @@ function createButtons2(startCoordinates) {
 			});
 		} else if ((theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) &&
 		(theBoard[potentialCoordX + chooseMoveX[moveName]][potentialCoordY + chooseMoveY[moveName]] === 0)) {
-			coordsToDraw[0] = potentialCoordX + chooseMoveX[moveName];
-			coordsToDraw[1] = potentialCoordY + chooseMoveY[moveName];
+			coordsToDraw[0] = potentialCoordX;
+			coordsToDraw[1] = potentialCoordY;
 			k++;
-			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
+			const element = getElementById(calculateIdFromCoordinates([coordsToDraw[0] + chooseMoveX[moveName], coordsToDraw[1] + chooseMoveY[moveName]])); // too long
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
 				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
-				const direction1 = (elementCoordinates[0] - startCoordinates[0]) / 2;
-				const direction2 = (elementCoordinates[1] - startCoordinates[1]) / 2;
+				const direction1 = (elementCoordinates[0] - startCoordinates[0]);
+				const direction2 = (elementCoordinates[1] - startCoordinates[1]);
 				moveThisToThatAgressively(startCoordinates[0], startCoordinates[1], direction1, direction2);
 				//clear board
 				displayBoard();
@@ -189,7 +189,6 @@ leftDownJump       		rightDownJump
 
 function catalogueAllMoves() {
 	possibleEnemyMoves = makeArray(8, 8, 4, 0);
-
 	numberPossibilities = 0;
 	for (let i = 0; i < boardLength; i++) {
 		for (let j = 0; j < boardLength; j++) {
