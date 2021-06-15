@@ -73,11 +73,11 @@ function calculateCoordinatesFromId(id) {
 	let currentId = 0;
 	for (let i = 0; i < boardLength; i++) {
 		for (let j = 0; j < boardLength; j++) {
-			currentId++;
 			if (currentId === id) {
 				const location = [i, j];
 				return location;
 			}
+            currentId++;
 		}
 	}
 }
