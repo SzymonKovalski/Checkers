@@ -142,7 +142,7 @@ function aiMove() {
 	console.log('enemy turn');
 	console.table(theBoard);
 
-	catalogueAllMoves(); //either 0 for player or 1 for enemies
+	catalogueAllMoves(); 
 	const randomNumber = Math.floor((Math.random() * numberPossibilities));
 	let counter = 0;
 	let chosenMove = 0;
