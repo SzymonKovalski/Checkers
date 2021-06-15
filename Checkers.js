@@ -129,34 +129,13 @@ function createButtons2(startCoordinates) {
 
 
 
-//player turn version
-blackTurn();
-
-function blackTurn() {
-
-	console.log('your turn');
-	console.table(theBoard);
-	display_Board();
-
-	const inputStartX = prompt('Enter X pos of your token', [0]);
-	const inputStartY = prompt('Enter Y pos of your token', [0]);
-
-	if (theBoard[inputStartX][inputStartY] === wwhite || Wwhite) { // antipattern 7. idiotproof this
-		//put where you can move to here
-
-		const inputEndY = prompt('do you want to move to the right?', [1]);
-		const inputEndX = -1;
-		if (theBoard[inputStartX - 1][inputStartY + inputEndY] === 0) {
-			moveThisToThat(inputStartX, inputStartY, inputEndX, inputEndY);
-			whiteTurn();
-		}
-
-	} else prompt('that is not your token');
-}
 //white turn version. do AI with this one
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
 let numberPossibilities = 0;
 function aiMove() {
+
+	// i forgot what i was supposed to put here :/
+
 	let inputStartX = 0;
 	let inputStartY = 0;
 
