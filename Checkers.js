@@ -142,14 +142,16 @@ function aiMove() {
 	console.log('enemy turn');
 	console.table(theBoard);
 
-	catalogueAllMoves(); 
+	catalogueAllMoves();
 	const randomNumber = Math.floor((Math.random() * numberPossibilities));
 	let counter = 0;
 	let chosenMove = 0;
 	for (let i = 0; i < boardLength; i++) {
 		for (let j = 0; j < boardLength; j++) {
 			for (let k = 0; k < 4; k++) {
-				if ((possibleEnemyMoves[i][j][k] !== 0) && (theBoard[i][j] === bblack || Bblack) && (counter < randomNumber)) {		//way too long
+				if ((possibleEnemyMoves[i][j][k] !== 0) &&
+				(theBoard[i][j] === bblack || Bblack) &&
+				(counter < randomNumber)) {		//way too long
 					counter++;
 					inputStartX = i;
 					inputStartY = j;
