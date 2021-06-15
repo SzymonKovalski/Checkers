@@ -1,4 +1,4 @@
-
+const boardLength - 8;
 function calculateCoordinatesFromId(id) {
 	let currentId = 0;
 	for (let i = 0; i < boardLength; i++) {
