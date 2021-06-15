@@ -51,10 +51,6 @@ const moveNames = {
 	1: 'rightUp',
 	2: 'leftDown',
 	3: 'rightDown',
-	4: 'leftUpJump',
-	5: 'rightUpJump',
-	6: 'leftDownJump',
-	7: 'rightDownJump'
 };
 const boardLength = 8;
 
@@ -111,18 +107,17 @@ function createButtons2(startCoordinates) {
 				aiMove();
 				createButtons1();
 			});
-		}
-		if ((theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) &&
+		} else if ((theBoard[potentialCoordX][potentialCoordY] === wwhite || Wwhite) &&
 		(theBoard[potentialCoordX + chooseMoveX[moveName]][potentialCoordY + chooseMoveY[moveName]] === 0)) {
-			coordsToDraw[0] = potentialCoordX;
-			coordsToDraw[1] = potentialCoordY;
+			coordsToDraw[0] = potentialCoordX + chooseMoveX[moveName];
+			coordsToDraw[1] = potentialCoordY + chooseMoveY[moveName];
 			k++;
 			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
 				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
-				const direction1 = elementCoordinates[0] - startCoordinates[0];
-				const direction2 = elementCoordinates[1] - startCoordinates[1];
+				const direction1 = (elementCoordinates[0] - startCoordinates[0]) / 2;
+				const direction2 = (elementCoordinates[1] - startCoordinates[1]) / 2;
 				moveThisToThatAgressively(startCoordinates[0], startCoordinates[1], direction1, direction2);
 				//clear board
 				displayBoard();
@@ -130,7 +125,7 @@ function createButtons2(startCoordinates) {
 			});
 		}
 	}
-}
+} // this can be better
 
 
 
