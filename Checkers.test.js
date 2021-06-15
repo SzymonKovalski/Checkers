@@ -14,7 +14,7 @@ function calculateCoordinatesFromId(id) {
 
 
 test('properly finds coordinates', () => {
-    expect(calculateCoordinatesFromId(15)).toBe([7, 1]);
+    expect(calculateCoordinatesFromId(15)).toBe([1, 7]);
 });
 
-// npm testnpm test
+// npm test
