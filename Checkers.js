@@ -197,18 +197,16 @@ function catalogueAllMoves() {
 				possibleEnemyMoves[i][j][k] = 'leftDown';
 				k++;
 				numberPossibilities++;
-			}
-			if (theBoard[i + 1][j + 1] === 0 && i < (boardLength - 1) && j < (boardLength)) {
-				possibleEnemyMoves[i][j][k] = 'rightDown';
-				k++;
-				numberPossibilities++;
-			}
-			if ((theBoard[i + 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j < 1) {
+			} else if ((theBoard[i + 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i < (boardLength - 1) && j < 1) {
 				possibleEnemyMoves[i][j][k] = 'leftDownJump';
 				k++;
 				numberPossibilities++;
 			}
-			if ((theBoard[i + 1][j + 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j < (boardLength - 1)) {
+			if (theBoard[i + 1][j + 1] === 0 && i < (boardLength) && j < (boardLength)) {
+				possibleEnemyMoves[i][j][k] = 'rightDown';
+				k++;
+				numberPossibilities++;
+			} else if ((theBoard[i + 1][j + 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j + 2] === 0) && i < (boardLength - 1) && j < (boardLength - 1)) {
 				possibleEnemyMoves[i][j][k] = 'rightDownJump';
 				k++;
 				numberPossibilities++;
@@ -218,18 +216,16 @@ function catalogueAllMoves() {
 					possibleEnemyMoves[i][j][k] = 'leftUp';
 					k++;
 					numberPossibilities++;
+				} else if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j > 1) {
+					possibleEnemyMoves[i][j][k] = 'leftUpJump';
+					k++;
+					numberPossibilities++;
 				}
 				if (theBoard[i - 1][j + 1] === 0 && i > 0 && j < (boardLength)) {
 					possibleEnemyMoves[i][j][k] = 'rightUp';
 					k++;
 					numberPossibilities++;
-				}
-				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j > 1) {
-					possibleEnemyMoves[i][j][k] = 'leftUpJump';
-					k++;
-					numberPossibilities++;
-				}
-				if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j < (boardLength - 2)) {
+				} else if ((theBoard[i - 1][j - 1] === (wwhite || Wwhite)) && (theBoard[i + 2][j - 2] === 0) && i > 1 && j < (boardLength - 1)) {
 					possibleEnemyMoves[i][j][k] = 'rightUpJump';
 					k++;
 					numberPossibilities++;
