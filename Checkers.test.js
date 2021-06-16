@@ -1,4 +1,5 @@
 const boardLength = 8;
+/*
 function calculateCoordinatesFromId(id) {
 	let currentId = 0;
 	for (let i = 0; i < boardLength; i++) {
@@ -16,5 +17,17 @@ function calculateCoordinatesFromId(id) {
 test('properly finds coordinates', () => {
     expect(calculateCoordinatesFromId(15)).toEqual([1, 7]);
 });
+*/
+
+/*
+function calculateIdFromCoordinates(coordinates) {
+	const id = 8 * coordinates[0] + coordinates[1];
+	return id;
+}
+test('properly finds coordinates', () => {
+    expect(calculateIdFromCoordinates([1,7])).toEqual(15);
+});
+*/
+
 
 // npm test
