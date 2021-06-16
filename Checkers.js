@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
-// 0 - empty
-// 1 - black
-// 2 - white
+
+
+//event cleaner
+//kingMe
+
 
 'use strict';
 // ||x
@@ -12,7 +14,8 @@ const bblack = 2;
 const wwhite = 1;
 const Bblack = 4;
 const Wwhite = 3;
-const theBoard = [
+// eslint-disable-next-line prefer-const
+let theBoard = [
 	[0, bblack, 0, bblack, 0, bblack, 0, bblack],
 	[bblack, 0, bblack, 0, bblack, 0, bblack, 0],
 	[0, bblack, 0, bblack, 0, bblack, 0, bblack],
@@ -102,7 +105,7 @@ function createButtons2(startCoordinates) {
 				const direction1 = elementCoordinates[0] - startCoordinates[0];
 				const direction2 = elementCoordinates[1] - startCoordinates[1];
 				moveThisToThat(startCoordinates[0], startCoordinates[1], direction1, direction2); // compact this
-				//clear board
+				eventListenerCleaner();
 				displayBoard();
 				aiMove();
 				createButtons1();
@@ -119,15 +122,20 @@ function createButtons2(startCoordinates) {
 				const direction1 = (elementCoordinates[0] - startCoordinates[0]);
 				const direction2 = (elementCoordinates[1] - startCoordinates[1]);
 				moveThisToThatAgressively(startCoordinates[0], startCoordinates[1], direction1, direction2);
-				//clear board
+				eventListenerCleaner();
 				displayBoard();
 				createButtons1();
 			});
 		}
 	}
-} // this can be better
+}
 
-
+function eventListenerCleaner() {
+	for (let i = 0; i < 64; i++) {
+		const element = document.getElementById(i);
+		element.removeEventListener('click');
+	}
+}
 
 //white turn version. do AI with this one
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
@@ -160,7 +168,6 @@ function aiMove() {
 			}
 		}
 	}
-
 	//now we have coords and move
 	console.log(inputStartX);
 	console.log(inputStartY);
