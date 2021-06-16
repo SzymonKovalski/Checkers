@@ -2,8 +2,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 
-
-//event cleaner
 //kingMe
 
 
@@ -137,6 +135,12 @@ function eventListenerCleaner() {
 	}
 }
 
+function kingMe() {
+	for (let j = 0; j < boardLength; j++) {
+	  	if (theBoard[0][j] === wwhite) theBoard[0][j] = Wwhite;
+		if (theBoard[7][j] === bblack) theBoard[7][j] = Bblack;
+	}
+}
 //white turn version. do AI with this one
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
 let numberPossibilities = 0;
@@ -250,13 +254,18 @@ function moveThisToThat(startX, startY, right, down) { //right and down are +-1
 	const temp = theBoard[startX][startY];
 	theBoard[startX][startY] = 0;
 	theBoard[endX][endY] = temp;
+	kingMe();
 }
 
 function moveThisToThatAgressively(startX, startY, right, down) {
+	const endX = startX + right;
+	const endY = startY + down;
+
 	const temp = theBoard[startX][startY];
 	theBoard[startX][startY] = 0;
-	theBoard[startX + right][startY + down] = 0;
-	theBoard[startX + 2 * right][startY + 2 * down] = temp;
+	theBoard[endX][endY] = 0;
+	theBoard[endX + right][endY + down] = temp;
+	kingMe();
 }
 
 function makeArray(w, h, d, val) {
