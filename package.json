@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/SzymonKovalski/Checkers#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-jest": "^27.0.2",
     "jest": "^27.0.4"
   }
 }

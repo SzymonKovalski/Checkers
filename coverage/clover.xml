@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1623863850971" clover="3.2.0">
+  <project timestamp="1623863850971" name="All files">
+    <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2" elements="13" coveredelements="13" complexity="0" loc="9" ncloc="9" packages="1" files="1" classes="1"/>
+    <file name="Checkers.js" path="/Users/zhangjiabao/Desktop/Checkers/Checkers.js">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="72" count="1" type="stmt"/>
+      <line num="73" count="1" type="stmt"/>
+      <line num="74" count="2" type="stmt"/>
+      <line num="75" count="16" type="cond" truecount="2" falsecount="0"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="79" count="15" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
+      <line num="86" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
