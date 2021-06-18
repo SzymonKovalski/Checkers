@@ -2,10 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 
-//kingMe
 
-
-'use strict';
 
 
 // ||x
@@ -59,7 +56,7 @@ const boardLength = 8;
 export {
 	calculateCoordinatesFromId as cCFI,
 	calculateIdFromCoordinates as cIFC
-}
+};
 function createButtons1() {
 	for (let i = 0; i < 64; i++) {
 		const element = document.getElementById(i);
