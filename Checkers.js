@@ -3,12 +3,43 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 
 
-
+ 
 
 // ||x
 // \/ y->
+
+function fillBoard(){
+	for (let y = 0; y < SIZE; y++) {
+		const row = document.createElement("div");
+		row.className = "row";
+		chessBoard.appendChild(row);
+		for (let x = 0; x < SIZE; x++) {
+		  const square = document.createElement("div");
+		  square.id = x.toString() + y.toString();
+		  square.className = (x + y) % 2 ? "bblack" : "bwhite";
+	
+		  // If the square should have a piece in it...
+		  if ((x + y) % 2 !== 0 && y !== 3 && y !== 4) {
+			const img = document.createElement("img");
+			if (y < 3) {
+			  img.id = "w" + square.id;
+			  img.src = "./img/white.png";
+			} else {
+			  img.id = "b" + square.id;
+			  img.src = "./img/black.png";
+			}
+			img.className = "piece";
+			img.setAttribute("draggable", "true");
+			square.appendChild(img);
+		  }
+		  square.setAttribute("draggable", "false");
+		  row.appendChild(square);
+		}
+}
+
+
 const bblack = 2;
-const wwhite = 1;
+const wwhite = 1;  
 const Bblack = 4;
 const Wwhite = 3;
 // eslint-disable-next-line prefer-const
@@ -59,8 +90,8 @@ export {
 };
 function createButtons1() {
 	for (let i = 0; i < 64; i++) {
-		const element = document.getElementById(idNumberFromId(id));
-		if (element.className === 'black-piece') {
+		const element = document.getElementById("p"+i);
+		if (element.className === 'cell') {
 			element.addEventListener('click', e => {
 				const startCordinates = calculateCoordinatesFromId(e.target.id);
 				createButtons2(startCordinates);
@@ -68,18 +99,11 @@ function createButtons1() {
 		}
 	}
 }
-
-let IdList = ['p0', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21', 'p22', 'p23', 'p24', 'p25', 'p26', 'p27', 'p28', 'p29', 'p30', 'p31', 'p32', 'p33', 'p34', 'p35', 'p36', 'p37', 'p38', 'p39', 'p40', 'p41', 'p42', 'p43', 'p44', 'p45', 'p46', 'p47', 'p48', 'p49', 'p50', 'p51', 'p52', 'p53', 'p54', 'p55', 'p56', 'p57', 'p58', 'p59', 'p60', 'p61', 'p62', 'p63'];
-function idNumberFromId(id){
-	const idNumber = parseInt(id.slice(1, 2));
-	return idNumber
-}
 function calculateCoordinatesFromId(id) {
-	const idNumber = idNumberFromId(id);
-	let currentId = 0;
+	let currentId ="p"+ 0;
 	for (let i = 0; i < 8; i++) {
 		for (let j = 0; j < 8; j++) {
-			if (currentId === idNumber) {
+			if (currentId === id) {
 				const location = [i, j];
 				return location;
 			}
@@ -87,13 +111,11 @@ function calculateCoordinatesFromId(id) {
 		}
 	}
 }
+
 function calculateIdFromCoordinates(coordinates) {
-	const idNumber = 8 * coordinates[0] + coordinates[1];
-	const id = 'p' + idNumber;
+	const id = ( 8 * coordinates[0] + coordinates[1]);
 	return id;
 }
-
-
 
 function createButtons2(startCoordinates) {
 	// eslint-disable-next-line prefer-const
@@ -108,7 +130,7 @@ function createButtons2(startCoordinates) {
 			coordsToDraw[0] = potentialCoordX;
 			coordsToDraw[1] = potentialCoordY;
 			k++;
-			const element = getElementById(calculateIdFromCoordinates(coordsToDraw));
+			const element = getElementById("p"+calculateIdFromCoordinates(coordsToDraw));
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
 				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
@@ -125,7 +147,7 @@ function createButtons2(startCoordinates) {
 			coordsToDraw[0] = potentialCoordX;
 			coordsToDraw[1] = potentialCoordY;
 			k++;
-			const element = getElementById(calculateIdFromCoordinates([coordsToDraw[0] + chooseMoveX[moveName], coordsToDraw[1] + chooseMoveY[moveName]])); // too long
+			const element = getElementById("p"+calculateIdFromCoordinates([coordsToDraw[0] + chooseMoveX[moveName], coordsToDraw[1] + chooseMoveY[moveName]])); // too long
 			element.className = className.replace('temporary class'); //!!!!!!!!!!!!!!!!!!!!!!!!!!
 			element.addEventListener('click', e => {
 				const elementCoordinates = calculateCoordinatesFromId(e.target.id);
@@ -142,8 +164,7 @@ function createButtons2(startCoordinates) {
 
 function eventListenerCleaner() {
 	for (let i = 0; i < 64; i++) {
-		const idNumber = idNumberFromId(id);
-		const element = document.getElementById(i);
+		const element = document.getElementById("p"+i);
 		element.removeEventListener('click');
 	}
 }
@@ -306,17 +327,15 @@ function displayClass(type) {
 }
 
 function displayBoard() {
-	let idNumber = 0;
+	let id = 0;
 	for (let row = 0; row < 8; row++) {
 		for (let square = 0; square < 8; square++) {
-			const id = 'p' + idNumber;
-			const doc = document.getElementById(id);
+			const doc = document.getElementById("p"+id);
 			doc.className = className.replace(displayClass(theBoard[row][square]));
-			idNumber++;
+			id++;
 		}
 	}
 }
-
 //class="noPieceHere"
-//class="red-piece"
+//class="noPieceHere"
 //class="black-piece"
