@@ -287,17 +287,16 @@ function makeArray(w, h, d, val) {
 
 function displayClass(type) {
 	switch (type) {
-		case 2: return 'red-piece';
-		case 1: return 'black-piece';
-		case 4: return 'red-piece';
-		case 3: return 'black-piece';
+		case wwhite: return 'red-piece';
+		case bblack: return 'black-piece';
+		case Wwhite: return 'red-piece';
+		case Bblack: return 'black-piece';
 	}
 	return 'noPieceHere';
 }
 
 function displayBoard() {
 	let id = 0;
-
 	for (let row = 0; row < 8; row++) {
 		for (let square = 0; square < 8; square++) {
 			const doc = document.getElementById(id);
