@@ -307,5 +307,5 @@ function displayBoard() {
 }
 
 //class="noPieceHere"
-//class="noPieceHere"
+//class="red-piece"
 //class="black-piece"
