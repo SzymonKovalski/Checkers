@@ -8,36 +8,6 @@
 // ||x
 // \/ y->
 
-function fillBoard(){
-	for (let y = 0; y < SIZE; y++) {
-		const row = document.createElement("div");
-		row.className = "row";
-		chessBoard.appendChild(row);
-		for (let x = 0; x < SIZE; x++) {
-		  const square = document.createElement("div");
-		  square.id = x.toString() + y.toString();
-		  square.className = (x + y) % 2 ? "bblack" : "bwhite";
-	
-		  // If the square should have a piece in it...
-		  if ((x + y) % 2 !== 0 && y !== 3 && y !== 4) {
-			const img = document.createElement("img");
-			if (y < 3) {
-			  img.id = "w" + square.id;
-			  img.src = "./img/white.png";
-			} else {
-			  img.id = "b" + square.id;
-			  img.src = "./img/black.png";
-			}
-			img.className = "piece";
-			img.setAttribute("draggable", "true");
-			square.appendChild(img);
-		  }
-		  square.setAttribute("draggable", "false");
-		  row.appendChild(square);
-		}
-	}
-}
-
 
 const bblack = 2;
 const wwhite = 1;  
@@ -349,5 +319,5 @@ function displayBoard() {
 	}
 }
 //class="noPieceHere"
-//class="noPieceHere"
+//class="red-piece"
 //class="black-piece"
