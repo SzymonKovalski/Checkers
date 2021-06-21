@@ -289,6 +289,8 @@ function displayClass(type) {
 	switch (type) {
 		case wwhite: return 'red-piece';
 		case bblack: return 'black-piece';
+		case Wwhite: return 'red-piece';
+		case Bblack: return 'black-piece';
 	}
 	return 'noPieceHere';
 }
