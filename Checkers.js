@@ -35,6 +35,7 @@ function fillBoard(){
 		  square.setAttribute("draggable", "false");
 		  row.appendChild(square);
 		}
+	}
 }
 
 
@@ -100,7 +101,7 @@ function createButtons1() {
 	}
 }
 function calculateCoordinatesFromId(id) {
-	let currentId ="p"+ 0;
+	let currentId = 0;
 	for (let i = 0; i < 8; i++) {
 		for (let j = 0; j < 8; j++) {
 			if (currentId === id) {
@@ -315,7 +316,7 @@ function makeArray(w, h, d, val) {
 	}
 	return arr;
 }
-
+/*
 function displayClass(type) {
 	switch (type) {
 		case wwhite: return 'red-piece';
@@ -335,7 +336,7 @@ function displayBoard() {
 			id++;
 		}
 	}
-}
+}*/
 //class="noPieceHere"
 //class="noPieceHere"
 //class="black-piece"
