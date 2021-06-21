@@ -153,12 +153,9 @@ function kingMe() {
 		if (theBoard[7][j] === bblack) theBoard[7][j] = Bblack;
 	}
 }
-//white turn version. do AI with this one
 let possibleEnemyMoves = makeArray(8, 8, 4, 0);
 let numberPossibilities = 0;
 function aiMove() {
-
-	// i forgot what i was supposed to put here :/
 
 	let inputStartX = 0;
 	let inputStartY = 0;
@@ -175,7 +172,7 @@ function aiMove() {
 			for (let k = 0; k < 4; k++) {
 				if ((possibleEnemyMoves[i][j][k] !== 0) &&
 				(theBoard[i][j] === bblack || Bblack) &&
-				(counter < randomNumber)) {		//way too long
+				(counter < randomNumber)) {
 					counter++;
 					inputStartX = i;
 					inputStartY = j;
@@ -184,7 +181,6 @@ function aiMove() {
 			}
 		}
 	}
-	//now we have coords and move
 	console.log(inputStartX);
 	console.log(inputStartY);
 	console.log(chosenMove);
@@ -192,7 +188,7 @@ function aiMove() {
 	const checkY = inputStartY + chooseMoveY[chosenMove];
 	if (theBoard[checkX][checkY] === 0) {
 		// eslint-disable-next-line no-constant-condition
-		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') { // this is 100% an antipattern
+		if (chosenMove === 'leftUp' || 'rightUp' || 'rightDown' || 'leftDown') {
 			moveThisToThat(inputStartX, inputStartY, chooseMoveX[chosenMove], chooseMoveY[chosenMove]);
 			console.log('AI is not retarded ', chosenMove);
 		} else {
@@ -201,14 +197,6 @@ function aiMove() {
 		}
 	}
 }
-//8 move variations. if any slot != 0 can move
-/*
-leftUpJump      		rightUpJump
-  		leftUp   	rightUp
-    			0
-	  leftDown		rightDown
-leftDownJump       		rightDownJump
-*/
 
 function catalogueAllMoves() {
 	possibleEnemyMoves = makeArray(8, 8, 4, 0);
@@ -257,12 +245,11 @@ function catalogueAllMoves() {
 		}
 	}
 }
-//functiom moves piece
-function moveThisToThat(startX, startY, right, down) { //right and down are +-1
+
+function moveThisToThat(startX, startY, right, down) {
 	const endX = startX + right;
 	const endY = startY + down;
 
-	//base movement only if not killing
 	const temp = theBoard[startX][startY];
 	theBoard[startX][startY] = 0;
 	theBoard[endX][endY] = temp;
@@ -318,6 +305,3 @@ function displayBoard() {
 		}
 	}
 }
-//class="noPieceHere"
-//class="red-piece"
-//class="black-piece"
