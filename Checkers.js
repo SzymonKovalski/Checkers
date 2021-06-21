@@ -287,10 +287,10 @@ function makeArray(w, h, d, val) {
 
 function displayClass(type) {
 	switch (type) {
-		case wwhite: return 'red-piece';
-		case bblack: return 'black-piece';
-		case Wwhite: return 'red-piece';
-		case Bblack: return 'black-piece';
+		case 2: return 'red-piece';
+		case 1: return 'black-piece';
+		case 4: return 'red-piece';
+		case 3: return 'black-piece';
 	}
 	return 'noPieceHere';
 }
