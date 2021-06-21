@@ -75,7 +75,7 @@ function idNumberFromId(id){
 	return idNumber
 }
 function calculateCoordinatesFromId(id) {
-	let idNumber = idNumberFromId(id);
+	const idNumber = idNumberFromId(id);
 	let currentId = 0;
 	for (let i = 0; i < 8; i++) {
 		for (let j = 0; j < 8; j++) {
@@ -142,6 +142,7 @@ function createButtons2(startCoordinates) {
 
 function eventListenerCleaner() {
 	for (let i = 0; i < 64; i++) {
+		const idNumber = idNumberFromId(id);
 		const element = document.getElementById(i);
 		element.removeEventListener('click');
 	}
@@ -305,12 +306,13 @@ function displayClass(type) {
 }
 
 function displayBoard() {
-	let id = 0;
+	let idNumber = 0;
 	for (let row = 0; row < 8; row++) {
 		for (let square = 0; square < 8; square++) {
+			const id = 'p' + idNumber;
 			const doc = document.getElementById(id);
 			doc.className = className.replace(displayClass(theBoard[row][square]));
-			id++;
+			idNumber++;
 		}
 	}
 }
