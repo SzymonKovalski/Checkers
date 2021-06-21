@@ -305,6 +305,7 @@ function displayBoard() {
 		}
 	}
 }
+
 //class="noPieceHere"
 //class="noPieceHere"
 //class="black-piece"
