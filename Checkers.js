@@ -91,7 +91,7 @@ export {
 };
 function createButtons1() {
 	for (let i = 0; i < 64; i++) {
-		const element = document.getElementById("p"+i);
+		const element = document.getElementById("p" + i);
 		if (element.className === 'cell') {
 			element.addEventListener('click', e => {
 				const startCordinates = calculateCoordinatesFromId(e.target.id);
@@ -100,11 +100,17 @@ function createButtons1() {
 		}
 	}
 }
+
+function idNumberFromId(id){
+	const idNumber = parseInt(id.slice(1, 2));
+	return idNumber
+}
 function calculateCoordinatesFromId(id) {
 	let currentId = 0;
+	const idNumber = idNumberFromId(id)
 	for (let i = 0; i < 8; i++) {
 		for (let j = 0; j < 8; j++) {
-			if (currentId === id) {
+			if (currentId === idNumber) {
 				const location = [i, j];
 				return location;
 			}
@@ -114,7 +120,8 @@ function calculateCoordinatesFromId(id) {
 }
 
 function calculateIdFromCoordinates(coordinates) {
-	const id = ( 8 * coordinates[0] + coordinates[1]);
+	const idNumber = ( 8 * coordinates[0] + coordinates[1]);
+	const id = 'p' + idNumber;
 	return id;
 }
 
@@ -316,7 +323,7 @@ function makeArray(w, h, d, val) {
 	}
 	return arr;
 }
-/*
+
 function displayClass(type) {
 	switch (type) {
 		case wwhite: return 'red-piece';
@@ -332,11 +339,15 @@ function displayBoard() {
 	for (let row = 0; row < 8; row++) {
 		for (let square = 0; square < 8; square++) {
 			const doc = document.getElementById("p"+id);
-			doc.className = className.replace(displayClass(theBoard[row][square]));
+			let prefix;
+			if(id % 2 === 0){
+				prefix = 'cell ';
+			} else prefix = 'cells ';
+			doc.className = className.replace(prefix + displayClass(theBoard[row][square]));
 			id++;
 		}
 	}
-}*/
+}
 //class="noPieceHere"
 //class="noPieceHere"
 //class="black-piece"
