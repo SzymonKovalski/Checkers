@@ -2,111 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-
-    <title>Checkers</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <main>
-      <table>
-        <tr>
-          <td><p id="p0" class="cell noPieceHere"></p></td>
-          <td><p id="p1" class="cells noPieceHere"></p></td>
-          <td><p id="p2" class="cell noPieceHere"></p></td>
-          <td><p id="p3" class="cells noPieceHere"></p></td>
-          <td><p id="p4" class="cell noPieceHere"></p></td>
-          <td><p id="p5" class="cells noPieceHere"></p></td>
-          <td><p id="p6" class="cell noPieceHere"></p></td>
-          <td><p id="p7" class="cells noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p8" class="cells noPieceHere"></p></td>
-          <td><p id="p9" class="cell noPieceHere"></p></td>
-          <td><p id="p10" class="cells noPieceHere"></p></td>
-          <td><p id="p11" class="cell noPieceHere"></p></td>
-          <td><p id="p12" class="cells noPieceHere"></p></td>
-          <td><p id="p13" class="cell noPieceHere"></p></td>
-          <td><p id="p14" class="cells noPieceHere"></p></td>
-          <td><p id="p15" class="cell noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p16" class="cell noPieceHere"></p></td>
-          <td><p id="p17" class="cells noPieceHere"></p></td>
-          <td><p id="p18" class="cell noPieceHere"></p></td>
-          <td><p id="p19" class="cells noPieceHere"></p></td>
-          <td><p id="p20" class="cell noPieceHere"></p></td>
-          <td><p id="p21" class="cells noPieceHere"></p></td>
-          <td><p id="p22" class="cell noPieceHere"></p></td>
-          <td><p id="p23" class="cells noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p24" class="cells noPieceHere"></p></td>
-          <td><p id="p25" class="cell noPieceHere"></p></td>
-          <td><p id="p26" class="cells cells noPieceHere"></p></td>
-          <td><p id="p27" class="cell noPieceHere"></p></td>
-          <td><p id="p28" class="cells noPieceHere"></p></td>
-          <td><p id="p29" class="cell noPieceHere"></p></td>
-          <td><p id="p30" class="cells noPieceHere"></p></td>
-          <td><p id="p31" class="cell noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p32" class="cell noPieceHere"></p></td>
-          <td><p id="p33" class="cells noPieceHere"></p></td>
-          <td><p id="p34" class="cell noPieceHere"></p></td>
-          <td><p id="p35" class="cells noPieceHere"></p></td>
-          <td><p id="p36" class="cell noPieceHere"></p></td>
-          <td><p id="p37" class="cells noPieceHere"></p></td>
-          <td><p id="p38" class="cells noPieceHere"></p></td>
-          <td><p id="p39" class="cells noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p40" class="cells noPieceHere"></p></td>
-          <td><p id="p41" class="cell noPieceHere"></p></td>
-          <td><p id="p42" class="cells noPieceHere"></p></td>
-          <td><p id="p43" class="cell noPieceHere"></p></td>
-          <td><p id="p44" class="cells noPieceHere"></p></td>
-          <td><p id="p45" class="cell noPieceHere"></p></td>
-          <td><p id="p46" class="cells noPieceHere"></p></td>
-          <td><p id="p47" class="cell noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p48" class="cell noPieceHere"></p></td>
-          <td><p id="p49" class="cells noPieceHere"></p></td>
-          <td><p id="p50" class="cell noPieceHere"></p></td>
-          <td><p id="p51" class="cells noPieceHere"></p></td>
-          <td><p id="p52" class="cell noPieceHere"></p></td>
-          <td><p id="p53" class="cells noPieceHere"></p></td>
-          <td><p id="p54" class="cell noPieceHere"></p></td>
-          <td><p id="p55" class="cells noPieceHere"></p></td>
-        </tr>
-        <tr>
-          <td><p id="p56" class="cells noPieceHere"></p></td>
-          <td><p id="p57" class="cell noPieceHere"></p></td>
-          <td><p id="p58" class="cells noPieceHere"></p></td>
-          <td><p id="p59" class="cell noPieceHere"></p></td>
-          <td><p id="p60" class="cells noPieceHere"></p></td>
-          <td><p id="p61" class="cell noPieceHere"></p></td>
-          <td><p id="p62" class="cells noPieceHere"></p></td>
-          <td><p id="p63" class="cell noPieceHere"></p></td>
-        </tr>
-      </table>
-      <div class="desktop">
-        <div class="red-turn-text">Reds turn</div>
-        <p id="divider">|</p>
-        <div class="black-turn-text">Blacks turn</div>
-      </div>
-
-      <script defer src="Checkers.js"></script>
-    </main>
+    <div id="chessBoard"></div>
+    <br /><br />
+    <button id="resetGame">Reset Game</button>
   </body>
+  <script src="index.js"></script>
 </html>
