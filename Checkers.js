@@ -21,13 +21,9 @@ function createBoard() {
       // If the square should have a piece in it...
       if ((x + y) % 2 !== 0 && y !== 3 && y !== 4) {
         const img = document.createElement("img");
-        if (y < 3) {
-          img.id = square.id;
-          img.src = "./img/black.jpeg";
-        } else {
-          img.id = square.id;
-          img.src = "./img/white.jpeg";
-        }
+        img.id = square.id;
+        const color = y < 3 ?"black":"white";
+        img.src =`./img/${color}.jpeg`;
         img.className = "piece";
         img.setAttribute("draggable", "true");
         square.appendChild(img);
