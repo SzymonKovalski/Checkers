@@ -378,7 +378,7 @@ function makeArray(w, h, d, val) {
   }
   return arr;
 }
-
+/*
 function displayClass(type) {
   switch (type) {
     case wwhite:
@@ -403,7 +403,7 @@ function displayBoard() {
       console.log(doc);
     }
   }
-}
+}*/
 //displayBoard();
 //class="noPieceHere"
 //class="noPieceHere"
